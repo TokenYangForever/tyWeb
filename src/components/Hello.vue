@@ -2,10 +2,20 @@
   <section class="todoapp">
     <header class="header">
       <h1>todos</h1>
-      <input class="new-todo"
+      <div class='td-input-item'>
+        <span class='input-title'>标题</span>
+        <input class="new-todo"
         autofocus autocomplete="off"
         placeholder="What needs to be done?"
         v-model="newTitle">
+      </div>
+      <div class='td-input-item'>
+        <span class='input-title'>描述</span>
+        <input class="new-todo"
+        autofocus autocomplete="off"
+        placeholder="How to do it?"
+        v-model="newDes">
+      </div>
     </header>
   </section>
 </template>
@@ -15,7 +25,8 @@ export default {
   name: 'hello',
   data () {
     return {
-      newTitle: ''
+      newTitle: '',
+      newDes: ''
     }
   }
 }
@@ -25,13 +36,10 @@ export default {
 <style scoped>
 .todoapp {
     background: #fff;
-    margin: 130px 0 40px 0;
     position: relative;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
 }
 .todoapp h1 {
-    position: absolute;
-    top: -155px;
     width: 100%;
     font-size: 100px;
     font-weight: 100;
@@ -49,9 +57,9 @@ export default {
 }
 .new-todo, .edit {
     position: relative;
-    margin: 0;
-    width: 100%;
+    margin: 0 5%;
     font-size: 24px;
+    min-width: 50%;
     font-family: inherit;
     font-weight: inherit;
     line-height: 1.4em;
@@ -63,6 +71,10 @@ export default {
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    border-radius: 10px;
+}
+.td-input-item{
+    margin: 15px 0;
 }
 
 </style>
