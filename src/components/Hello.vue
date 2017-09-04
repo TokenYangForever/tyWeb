@@ -1,22 +1,18 @@
 <template>
   <section class="todoapp">
-    <header class="header">
       <h1>todos</h1>
       <div class='td-input-item'>
         <span class='input-title'>标题</span>
-        <input class="new-todo"
-        autofocus autocomplete="off"
-        placeholder="What needs to be done?"
-        v-model="newTitle">
+        <el-input auto-complete="off" placeholder="What needs to be done?" v-model="newTitle"></el-input>
       </div>
       <div class='td-input-item'>
         <span class='input-title'>描述</span>
-        <input class="new-todo"
-        autofocus autocomplete="off"
-        placeholder="How to do it?"
-        v-model="newDes">
+        <el-input auto-complete="off" placeholder="How to do it?" v-model="newDes"></el-input>
       </div>
-    </header>
+      <div class="td-button-wrap">
+        <el-button type="primary">添加</el-button>
+        <el-button @click="clearAction()">清空</el-button>
+      </div>
   </section>
 </template>
 
@@ -28,6 +24,12 @@ export default {
       newTitle: '',
       newDes: ''
     }
+  },
+  methods: {
+    clearAction () {
+      this.newTitle = ''
+      this.newDes = ''
+    }
   }
 }
 </script>
@@ -38,6 +40,7 @@ export default {
     background: #fff;
     position: relative;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+    padding-bottom: 10px;
 }
 .todoapp h1 {
     width: 100%;
@@ -49,32 +52,12 @@ export default {
     -moz-text-rendering: optimizeLegibility;
     text-rendering: optimizeLegibility;
 }
-.new-todo {
-    padding: 16px 16px 16px 60px;
-    border: none;
-    background: rgba(0, 0, 0, 0.003);
-    box-shadow: inset 0 -2px 1px rgba(0,0,0,0.03);
-}
-.new-todo, .edit {
-    position: relative;
-    margin: 0 5%;
-    font-size: 24px;
-    min-width: 50%;
-    font-family: inherit;
-    font-weight: inherit;
-    line-height: 1.4em;
-    border: 0;
-    color: inherit;
-    padding: 6px;
-    border: 1px solid #999;
-    box-shadow: inset 0 -1px 5px 0 rgba(0, 0, 0, 0.2);
-    box-sizing: border-box;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    border-radius: 10px;
-}
 .td-input-item{
     margin: 15px 0;
+    padding: 0 10%;
+}
+.td-button-wrap {
+  margin: 20px 0
 }
 
 </style>
