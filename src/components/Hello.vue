@@ -1,5 +1,6 @@
 <template>
   <section class="todoapp">
+      <el-button type="primary" @click="ajaxAction()">接口</el-button>
       <h1>todos</h1>
       <div class='td-input-item'>
         <span class='input-title'>标题</span>
@@ -29,6 +30,13 @@ export default {
     clearAction () {
       this.newTitle = ''
       this.newDes = ''
+    },
+    ajaxAction () {
+      this.axios.get('http://192.168.0.113:8081/getTodo').then((response) => {
+        console.log(response)
+      }).catch((err) => {
+        console.log(err)
+      })
     }
   }
 }

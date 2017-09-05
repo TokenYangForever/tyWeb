@@ -4,7 +4,8 @@ let getlist = require('./methods/getlist')
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.all('*', function(req, res, next) {
+app.use('/', function(req, res, next) {
+   console.log({path: req.path, baseUrl: req.baseUrl, originalUrl: req.originalUrl, url: req.url});
    res.header("Access-Control-Allow-Origin", "*");
    res.header("Access-Control-Allow-Headers", "X-Requested-With");
    res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
@@ -15,7 +16,7 @@ app.all('*', function(req, res, next) {
 
 
 
-app.get('/getTodo.html', getlist);
+app.get('/getTodo', getlist);
 
 var server = app.listen(8081, function () {
 	console.log('Example app listening on port 8081!');
