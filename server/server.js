@@ -1,6 +1,5 @@
-let express = require('express');
 let bodyParser = require("body-parser"); 
-let app = new express()
+let app = new (require('express'))()
 let getlist = require('./methods/getlist')
 
 app.use(bodyParser.urlencoded({ extended: false }));
