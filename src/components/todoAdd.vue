@@ -1,17 +1,21 @@
 <template>
   <section class="todoapp">
-      <el-button type="primary" @click="ajaxAction()">接口</el-button>
-      <h1>todos</h1>
+      <h1>Add todos</h1>
       <div class='td-input-item'>
         <span class='input-title'>标题</span>
         <el-input auto-complete="off" placeholder="What needs to be done?" v-model="newTitle"></el-input>
       </div>
       <div class='td-input-item'>
         <span class='input-title'>描述</span>
-        <el-input auto-complete="off" placeholder="How to do it?" v-model="newDes"></el-input>
+        <el-input
+          type="textarea"
+          :autosize="{ minRows: 2, maxRows: 4}"
+          placeholder="How to do it?"
+          v-model="newDes">
+        </el-input>
       </div>
       <div class="td-button-wrap">
-        <el-button type="primary">添加</el-button>
+        <el-button type="primary" @click="addAction()">添加</el-button>
         <el-button @click="clearAction()">清空</el-button>
       </div>
   </section>
@@ -19,7 +23,7 @@
 
 <script>
 export default {
-  name: 'hello',
+  name: 'todoAdd',
   data () {
     return {
       newTitle: '',
@@ -31,11 +35,28 @@ export default {
       this.newTitle = ''
       this.newDes = ''
     },
-    ajaxAction () {
-      this.axios.get('http://192.168.0.113:8081/getTodo').then((response) => {
-        console.log(response)
+    addAction () {
+      this.axios.post('http://192.168.0.113:8081/savetodo', {
+        title: this.newTitle,
+        description: this.newDes
+      }).then((response) => {
+        if (response.data.code === 200) {
+          this.$notify({
+            title: '添加成功',
+            message: '已添加到todolist中',
+            type: 'success',
+            duration: '1800'
+          });
+          this.clearAction()
+        } else {
+          return Promise.reject(response.data.err.code)
+        }
       }).catch((err) => {
-        console.log(err)
+        this.$notify.error({
+          title: '错误',
+          message: err,
+          duration: '1800'
+        });
       })
     }
   }
