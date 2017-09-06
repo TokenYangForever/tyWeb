@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import config from '../common/config'
 export default {
   name: 'todoAdd',
   data () {
@@ -36,7 +37,7 @@ export default {
       this.newDes = ''
     },
     addAction () {
-      this.axios.post('http://192.168.0.113:8081/savetodo', {
+      this.axios.post(`${config.preurl}savetodo`, {
         title: this.newTitle,
         description: this.newDes
       }).then((response) => {

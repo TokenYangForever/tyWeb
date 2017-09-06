@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import config from '../common/config'
 export default {
   name: 'todolist',
   data () {
@@ -19,7 +20,7 @@ export default {
     }
   },
   created () {
-    this.axios.get('http://192.168.0.113:8081/getTodo').then((response) => {
+    this.axios.get(`${config.preurl}getTodo`).then((response) => {
       this.todoData = response.data.result
     }).catch((err) => {
       console.log(err)

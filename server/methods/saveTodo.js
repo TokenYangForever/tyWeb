@@ -6,7 +6,7 @@ module.exports =  function (req, res) {
       result: []
     }
     let reqParam = req.body
-    let qstring = "INSERT INTO todolist (title, description) VALUES ('"+reqParam.title+"','"+reqParam.description+"')"
+    let qstring = `INSERT INTO todolist (title, description) VALUES ('${reqParam.title}','${reqParam.description}')`
     connection.query(qstring, function(err, rs) { 
       if (err) { 
         console.log(`[query] - :${err}`); 
