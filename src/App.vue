@@ -5,6 +5,7 @@
       <el-submenu index="2">
         <template slot="title">Todo-List</template>
         <el-menu-item index="2-1">添加</el-menu-item>
+        <el-menu-item index="2-3">完成/删除</el-menu-item>
         <el-menu-item index="2-2">查看</el-menu-item>
       </el-submenu>
       <el-menu-item index="3"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
@@ -25,13 +26,16 @@ export default {
         case '2-1':
           path = 'todo-add'
           break
+        case '2-2':
+          path = 'todo-list'
+          break
+        case '2-3':
+          path = 'todo-edit'
+          break
         case '1':
           path = '/'
           break
-        default:
-          path = 'todo-list'
       }
-      console.log(index, val)
       router.push({ path: path })
     }
   }
@@ -50,7 +54,5 @@ export default {
   margin: 0;
   padding: 0;
 }
-.input-title{
-  font-size: 22px;
-}
+  
 </style>

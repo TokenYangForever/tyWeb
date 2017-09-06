@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import config from '../common/config'
+import config from '../../common/config'
 export default {
   name: 'todoAdd',
   data () {
@@ -66,6 +66,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.input-title {
+  font-size: 22px;
+}
 .todoapp {
     background: #fff;
     position: relative;
