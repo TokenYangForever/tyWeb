@@ -2,6 +2,7 @@ let bodyParser = require("body-parser");
 let app = new (require('express'))()
 let getlist = require('./methods/getlist')
 let savetodo = require('./methods/saveTodo')
+let searchById = require('./methods/searchById')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -17,7 +18,8 @@ app.use('/', function(req, res, next) {
 
 
 app.post('/savetodo', savetodo)
-app.get('/getTodo', getlist);
+app.get('/getTodo', getlist)
+app.get('/searchById', searchById)
 
 var server = app.listen(8081, function () {
 	console.log('Example app listening on port 8081!');

@@ -1,23 +1,24 @@
 <template>
   <section class="todoapp">
-      <h1>Add todos</h1>
-      <div class='td-input-item'>
-        <span class='input-title'>完成项目</span>
-        <el-input auto-complete="off" placeholder="What needs to be done?" v-model="newTitle"></el-input>
-      </div>
-      <div class='td-input-item'>
-        <span class='input-title'>描述</span>
-        <el-input
-          type="textarea"
-          :autosize="{ minRows: 2, maxRows: 4}"
-          placeholder="How to do it?"
-          v-model="newDes">
-        </el-input>
-      </div>
-      <div class="td-button-wrap">
-        <el-button type="primary" @click="addAction()">添加</el-button>
-        <el-button @click="clearAction()">清空</el-button>
-      </div>
+      <h1>Edit todos</h1>
+        <div class="searchWrap">
+          <el-input
+            placeholder="请输入itemid"
+            icon="search"
+            v-model="serId"
+            :on-icon-click="searchAction">
+          </el-input>
+          <div class="search-explain">
+            <i class="el-icon-information"></i>
+            首先根据id查找出item，再进行操作，暂不支持批量操作
+          </div>
+        </div>
+        <el-tabs v-model="activeName" v-if='itemContent.itemid'>
+          <el-tab-pane label="编辑" name="编辑">
+              
+          </el-tab-pane>
+          <el-tab-pane label="删除" name="删除">删除</el-tab-pane>
+        </el-tabs>
   </section>
 </template>
 
@@ -27,32 +28,29 @@ export default {
   name: 'todoEdit',
   data () {
     return {
-      newTitle: '',
-      newDes: ''
+      activeName: '编辑',
+      serId: '',
+      itemContent: {}
     }
   },
   methods: {
-    clearAction () {
-      this.newTitle = ''
-      this.newDes = ''
-    },
     addAction () {
-      this.axios.post(`${config.preurl}savetodo`, {
-        title: this.newTitle,
-        description: this.newDes
-      }).then((response) => {
+    },
+    clearSearch () {
+      this.serId = ''
+    },
+    searchAction () {
+      this.axios.get(`${config.preurl}searchById?serId=${this.serId}`)
+      .then((response) => {
+        console.log(response)
         if (response.data.code === 200) {
-          this.$notify({
-            title: '添加成功',
-            message: '已添加到todolist中',
-            type: 'success',
-            duration: '1800'
-          });
-          this.clearAction()
+          this.itemContent = response.data.result[0]
+          this.clearSearch()
         } else {
           return Promise.reject(response.data.err.code)
         }
       }).catch((err) => {
+        this.itemContent = {}
         this.$notify.error({
           title: '错误',
           message: err,
@@ -66,6 +64,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.searchWrap {
+  margin: 10px 5%
+}
+.search-explain {
+  margin-top: 5px;
+  color: #324057;
+}
 .input-title {
   font-size: 22px;
 }
