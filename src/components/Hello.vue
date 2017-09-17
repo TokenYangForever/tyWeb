@@ -73,6 +73,13 @@ export default {
         console.error(err)
       })
     }
+  },
+  mounted () {
+    // console.log(this)
+    this.showAlert({
+      msg: '这是一个警告框',
+      autoClose: false
+    })
   }
 }
 </script>
