@@ -5,7 +5,7 @@ module.exports = {
     sourceType: 'module'
   },
   env: {
-    browser: true,
+    browser: true
   },
   // https://github.com/feross/standard/blob/master/RULES.md#javascript-standard-style
   extends: 'standard',
@@ -24,6 +24,7 @@ module.exports = {
     'no-new': 0,
     'indent': 0,
     'no-tabs': 0,
+    'camelcase': 0,
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
   }

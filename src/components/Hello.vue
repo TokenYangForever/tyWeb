@@ -51,8 +51,12 @@ export default {
         result[key]._rowVariant = result[key].statu === 'done' ? 'success' : 'warning'
       }
       this.todoData = result
-    }).catch((err) => {
-      console.error(err)
+    }).catch(() => {
+      this.showAlert({
+        msg: '接口异常，请联系管理员Token',
+        autoClose: false,
+        type: 'error'
+      })
     })
   },
   methods: {
@@ -69,16 +73,16 @@ export default {
         } else {
           return Promise.reject(data.err)
         }
-      }).catch(err => {
-        console.error(err)
+      }).catch(() => {
+        this.showAlert({
+          msg: '接口异常，请联系管理员Token',
+          autoClose: false,
+          type: 'error'
+        })
       })
     }
   },
   mounted () {
-    this.showAlert({
-      msg: '这是一个警告框',
-      autoClose: false
-    })
   }
 }
 </script>

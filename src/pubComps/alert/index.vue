@@ -1,6 +1,6 @@
 <template>
     <div class='alert-pop' v-if="isOpen">
-      <div class="status statu-default">
+      <div class="status" :class='imgClass'>
       </div>
       <div class="alert-msg">{{options.msg}}</div>
       <i class="el-icon-close" @click='isOpen=false'></i>
@@ -8,18 +8,28 @@
 </template>
 
 <script type="text/babel">
+const Class_map = {
+  'default': 'statu-default',
+  'warn': 'statu-warn',
+  'success': 'statu-success',
+  'error': 'statu-err'
+}
   export default {
     data () {
       return {
         isOpen: true,
         delay: this.options.delay || 3000,
-        autoClose: this.options.autoClose
+        autoClose: this.options.autoClose,
+        type: this.options.type || 'default'
       }
     },
     props: {
       options: {}
     },
     computed: {
+      imgClass () {
+        return Class_map[this.type] || 'statu-default'
+      }
     },
 
     watch: {
@@ -59,8 +69,8 @@
 <style>
   .alert-pop{
     box-shadow: 0 2px 4px rgba(0,0,0,.12), 0 0 6px rgba(0,0,0,.04);
-    min-width: 300px;
-    padding: 10px 12px;
+    min-width: 330px;
+    padding: 10px 15px;
     box-sizing: border-box;
     border-radius: 2px;
     position: fixed;
@@ -85,7 +95,7 @@
   .alert-pop .el-icon-close{
     position: absolute;
     top: 12px;
-    right: 15px;
+    right: 10px;
   }
   .status {
     width: 44px;
