@@ -8,8 +8,8 @@
 </template>
 
 <script>
-// import config from '../../common/config.js'
 // import util from '../common/util.js'
+
 export default {
   name: 'hello',
   data () {
@@ -44,7 +44,7 @@ export default {
     }
   },
   created () {
-    this.axios.get(`http://192.168.0.113:8081/getTodo`).then((response) => {
+    this.axios.get(`${this._config().preurl}getTodo`).then((response) => {
       let result = response.data.result
       for (let key in result) {
         // result[key] = util.pick(result[key], ['title', 'description', 'statu'])
@@ -60,7 +60,7 @@ export default {
       let listitem = this.todoData.find((val) => item.itemid === val.itemid)
       let changeStatu = listitem.statu === 'done' ? 'unsolve' : 'done'
       let changeVariant = listitem.statu === 'done' ? 'warning' : 'success'
-      this.axios.get(`http://192.168.0.113:8081/updateItem?statu=${changeStatu}&serid=${item.itemid}`)
+      this.axios.get(`${this._config().preurl}updateItem?statu=${changeStatu}&serid=${item.itemid}`)
       .then((data) => {
         data = data.data
         if (data.code === 200) {
@@ -75,7 +75,6 @@ export default {
     }
   },
   mounted () {
-    // console.log(this)
     this.showAlert({
       msg: '这是一个警告框',
       autoClose: false

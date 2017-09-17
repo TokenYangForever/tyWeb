@@ -7,9 +7,12 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import AlertComp from './pubComps/alert/index.js'
 
+// BootstrapVue
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+import config from './common/config.js'
 
 Vue.use(VueAxios, axios)
 Vue.use(BootstrapVue)
@@ -17,6 +20,9 @@ Vue.mixin({
   methods: {
     showAlert (opts) {
       return new AlertComp(opts)
+    },
+    _config () {
+      return config
     }
   }
 })
