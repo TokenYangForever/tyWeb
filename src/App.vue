@@ -4,7 +4,7 @@
     
       <b-nav-toggle target="nav_collapse"></b-nav-toggle>
     
-      <b-navbar-brand href="#">首页</b-navbar-brand>
+      <b-navbar-brand @click='routeAction("/")'>首页</b-navbar-brand>
     
       <b-collapse is-nav id="nav_collapse">
     
@@ -15,11 +15,9 @@
     
         <!-- Right aligned nav items -->
         <b-nav is-nav-bar class="ml-auto">
-          <b-nav-item-dropdown text="Lang" right>
-            <b-dropdown-item href="#">EN</b-dropdown-item>
-            <b-dropdown-item href="#">ES</b-dropdown-item>
-            <b-dropdown-item href="#">RU</b-dropdown-item>
-            <b-dropdown-item href="#">FA</b-dropdown-item>
+          <b-nav-item-dropdown text="todoList" right>
+            <b-dropdown-item @click='routeAction("/addTodo")'>新增</b-dropdown-item>
+            <b-dropdown-item @click='routeAction("/viewTodo")'>查看</b-dropdown-item>
           </b-nav-item-dropdown>
     
           <b-nav-item-dropdown right>
@@ -67,9 +65,14 @@
 //     lastShakeZ = curShakeZ
 //   }
 // }
-
+import router from './router'
 export default {
-  name: 'app'
+  name: 'app',
+  methods: {
+    routeAction (url) {
+      router.push({ path: url })
+    }
+  }
 }
 </script>
 

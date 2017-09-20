@@ -11,7 +11,7 @@
 // import util from '../common/util.js'
 
 export default {
-  name: 'hello',
+  name: 'todoList',
   data () {
     return {
       todoData: [],

@@ -1,10 +1,12 @@
 <template>
-    <div class='alert-pop' v-if="isOpen">
-      <div class="status" :class='imgClass'>
+  <transition name="slide-fade">
+      <div class='alert-pop' v-if="isOpen">
+        <div class="status" :class='imgClass'>
+        </div>
+        <div class="alert-msg">{{options.msg}}</div>
+        <i class="el-icon-close" @click='isOpen=false'></i>
       </div>
-      <div class="alert-msg">{{options.msg}}</div>
-      <i class="el-icon-close" @click='isOpen=false'></i>
-    </div>
+</transition>
 </template>
 
 <script type="text/babel">
@@ -67,6 +69,23 @@ const Class_map = {
   }
 </script>
 <style>
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active for below version 2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active in below version 2.1.8 */ {
+  opacity: 0
+}
   .alert-pop{
     box-shadow: 0 2px 4px rgba(0,0,0,.12), 0 0 6px rgba(0,0,0,.04);
     min-width: 330px;
