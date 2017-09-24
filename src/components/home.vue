@@ -1,5 +1,9 @@
 <template>
-  <div>this is homepage</div>
+  <div>
+    <p>this is homepage</p>
+    <img id='preView' :src='preViewUrl'>
+    <div><input type="file" title="上传" @change='checkFile()' id='fileLoader'></div>
+  </div>
 </template>
 
 <script>
@@ -7,11 +11,16 @@ export default {
   name: 'homepage',
   data () {
     return {
+      preViewUrl: ''
     }
   },
   created () {
   },
   methods: {
+    checkFile () {
+      this.preViewUrl = window.URL.createObjectURL(document.querySelector('#fileLoader').files[0])
+      // alert('改变了')
+    }
   },
   mounted () {
   }

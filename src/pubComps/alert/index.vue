@@ -6,7 +6,7 @@
         <div class="alert-msg">{{options.msg}}</div>
         <i class="el-icon-close" @click='isOpen=false'></i>
       </div>
-</transition>
+  </transition>
 </template>
 
 <script type="text/babel">
