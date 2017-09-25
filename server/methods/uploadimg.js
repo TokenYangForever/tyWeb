@@ -9,7 +9,7 @@ module.exports = function (req, res) {
   let base64 = url.replace(/^data:image\/\w+;base64,/, '')// 去掉图片base64码前面部分data:image/png;base64
   let dataBuffer = new Buffer(base64, 'base64') // 把base64码转成buffer对象，
 
-  console.log('dataBuffer是否是Buffer对象：' + Buffer.isBuffer(dataBuffer))
+  // console.log('dataBuffer是否是Buffer对象：' + Buffer.isBuffer(dataBuffer))
   // console.log(req.body.imgUrl)
   if (req.body.imgUrl) {
     fs.writeFile('./lalala.png', dataBuffer, function (err) {
@@ -22,7 +22,7 @@ module.exports = function (req, res) {
       }
     })
   } else {
-    // backdata.err = '缺少图片url！'
-    // res.send(backdata)
+    backdata.err = '缺少图片url！'
+    res.send(backdata)
   }
 }

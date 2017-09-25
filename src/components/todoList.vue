@@ -8,7 +8,6 @@
 </template>
 
 <script>
-// import util from '../common/util.js'
 
 export default {
   name: 'todoList',
