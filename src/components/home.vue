@@ -1,7 +1,11 @@
 <template>
   <div>
     <p>this is homepage</p>
-    <img id='preView' :src='preViewUrl'>
+    <img id='preView' :src='preViewUrl' @drop="drop" @dragover="allowDrop">
+
+    <div id="div1" ondrop="wdrop(event)" ondragover="wallowDrop(event)"></div>
+    <br />
+
     <form role="form" id="myForm" method="post" enctype="multipart/form-data">
       <input type="file" title="上传" @change='checkFile' id='fileLoader'>
     </form>
@@ -22,6 +26,13 @@ export default {
     }
   },
   created () {
+    window.wallowDrop = function (ev) {
+      ev.preventDefault()
+    }
+    window.wdrop = function (ev) {
+      ev.preventDefault()
+      console.log(ev)
+    }
     // document.addEventListener('paste', e => { console.log(e) })
   },
   methods: {
@@ -60,6 +71,15 @@ export default {
     handlePaste (event) {
       event.preventDefault()
       window.eee = event
+    },
+    allowDrop (e) {
+      // alert('你拖上来了，我来阻止默认事件')
+      e.preventDefault()
+    },
+    drop (e) {
+      e.preventDefault()
+      alert('你拖上来，又放开了')
+      console.log(e)
     }
   },
   mounted () {
@@ -76,4 +96,9 @@ export default {
   top: 0;
   left: 0;
 }
+#preView{
+  width: 500px;
+  height: 500px;
+}
+#div1 {width:198px; height:66px;padding:10px;border:1px solid #aaaaaa;}
 </style>
