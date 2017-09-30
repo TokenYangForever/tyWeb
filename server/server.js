@@ -5,7 +5,7 @@ let savetodo = require('./methods/saveTodo')
 let updateItem = require('./methods/saveById')
 let uploadimg = require('./methods/uploadimg')
 
-app.use(bodyParser.json({limit : “2000kb”}))
+app.use(bodyParser.json({limit: '2000kb'}))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use('/', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*')
