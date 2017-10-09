@@ -49,28 +49,34 @@ export default {
           msg: '当前选择图片格式不合法',
           type: 'error'
         })
+        this.cleanInput()
         return
       }
-      vm.axios.post(`${vm._config().preurl}uploadimg`, {
+      this.axios.post(`${this._config().preurl}uploadimg`, {
         imgUrl: this.preViewUrl,
         imgName: this.imgName
       }).then((response) => {
         if (response.data.err) {
           return Promise.reject()
         }
-        vm.showAlert({
+        this.showAlert({
           msg: '上传成功~',
           autoClose: true,
           type: 'success'
         })
+        this.cleanInput()
       }).catch(() => {
-        vm.showAlert({
+        this.showAlert({
           msg: '接口异常，请联系管理员Token',
           autoClose: false,
           type: 'error'
         })
       })
     },
+    cleanInput () {
+        this.preViewUrl = ''
+        document.querySelector('#fileLoader').value = ''
+      },
     imageVaild (type) {
       return /\/(png|jpg|gif|jpeg)$/.test(type)
     }
