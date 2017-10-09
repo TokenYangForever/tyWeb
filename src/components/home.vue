@@ -1,13 +1,6 @@
 <template>
   <div>
     <p>this is homepage</p>
-    <img id='preView' :src='preViewUrl'>
-    <form role="form" id="myForm" method="post" enctype="multipart/form-data">
-      <input type="file" title="上传" @change='checkFile' id='fileLoader'>
-    </form>
-    <b-button :variant="'primary'" @click = 'uploadAction()'>
-      上传
-    </b-button>
   </div>
 </template>
 
@@ -16,66 +9,11 @@ export default {
   name: 'homepage',
   data () {
     return {
-      preViewUrl: '',
-      base64: '',
-      isImage: false,
-      imgName: ''
     }
   },
   created () {
   },
   methods: {
-    checkFile () {
-      let vm = this
-      let reader = new FileReader()
-      let _file = document.querySelector('#fileLoader').files[0]
-
-      this.isImage = this.imageVaild(_file.type)
-      this.imgName = _file.name
-      reader.readAsDataURL(_file)
-      reader.onload = function () {
-        vm.preViewUrl = this.result
-      }
-    },
-    uploadAction () {
-      let vm = this
-      if (!this.preViewUrl) {
-        vm.showAlert({
-          msg: '请选择图片',
-          type: 'error'
-        })
-        return
-      }
-      if (!this.isImage) {
-        vm.showAlert({
-          msg: '当前选择图片格式不合法',
-          type: 'error'
-        })
-        return
-      }
-      vm.axios.post(`${vm._config().preurl}uploadimg`, {
-        imgUrl: this.preViewUrl,
-        imgName: this.imgName
-      }).then((response) => {
-        if (response.data.err) {
-          return Promise.reject()
-        }
-        vm.showAlert({
-          msg: '上传成功~',
-          autoClose: true,
-          type: 'success'
-        })
-      }).catch(() => {
-        vm.showAlert({
-          msg: '接口异常，请联系管理员Token',
-          autoClose: false,
-          type: 'error'
-        })
-      })
-    },
-    imageVaild (type) {
-      return /\/(png|jpg|gif|jpeg)$/.test(type)
-    }
   },
   mounted () {
   }
@@ -84,16 +22,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.mask {
-  width: 1000px;
-  height: 1000px;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-#preView{
-  width: 500px;
-  height: 500px;
-}
-#div1 {width:198px; height:66px;padding:10px;border:1px solid #aaaaaa;}
 </style>

@@ -9,8 +9,10 @@
       <b-collapse is-nav id="nav_collapse">
     
         <b-nav is-nav-bar>
-          <b-nav-item href="#">Link</b-nav-item>
-          <b-nav-item href="#" disabled>Disabled</b-nav-item>
+          <b-nav-item-dropdown text="图片" right>
+            <b-dropdown-item @click='routeAction("/uploadImage")'>上传图片</b-dropdown-item>
+            <b-dropdown-item>查看图片</b-dropdown-item>
+          </b-nav-item-dropdown>
         </b-nav>
     
         <!-- Right aligned nav items -->
