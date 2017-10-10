@@ -36,16 +36,15 @@ export default {
       }
     },
     uploadAction () {
-      let vm = this
       if (!this.preViewUrl) {
-        vm.showAlert({
+        this.showAlert({
           msg: '请选择图片',
           type: 'error'
         })
         return
       }
       if (!this.isImage) {
-        vm.showAlert({
+        this.showAlert({
           msg: '当前选择图片格式不合法',
           type: 'error'
         })
@@ -74,9 +73,9 @@ export default {
       })
     },
     cleanInput () {
-        this.preViewUrl = ''
-        document.querySelector('#fileLoader').value = ''
-      },
+      this.preViewUrl = ''
+      document.querySelector('#fileLoader').value = ''
+    },
     imageVaild (type) {
       return /\/(png|jpg|gif|jpeg)$/.test(type)
     }
