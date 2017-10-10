@@ -87,16 +87,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.mask {
-  width: 1000px;
-  height: 1000px;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
 #preView{
   width: 300px;
   height: 300px;
 }
-#div1 {width:198px; height:66px;padding:10px;border:1px solid #aaaaaa;}
 </style>

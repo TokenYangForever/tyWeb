@@ -59,11 +59,11 @@ export default {
     })
   },
   methods: {
-    clickAction (item) {
-      let listitem = this.todoData.find((val) => item.itemid === val.itemid)
+    clickAction ({itemid}) {
+      let listitem = this.todoData.find((val) => itemid === val.itemid)
       let changeStatu = listitem.statu === 'done' ? 'unsolve' : 'done'
       let changeVariant = listitem.statu === 'done' ? 'warning' : 'success'
-      this.axios.get(`${this._config().preurl}updateItem?statu=${changeStatu}&serid=${item.itemid}`)
+      this.axios.get(`${this._config().preurl}updateItem?statu=${changeStatu}&serid=${itemid}`)
       .then((data) => {
         data = data.data
         if (data.code === 200) {
