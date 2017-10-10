@@ -2,29 +2,7 @@
 
 > A Vue.js project
 
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
-```
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## 一个自己写着玩的vue项目
+### 目前实现功能有：
+* todolist：查看\添加\修改状态，链接node服务器mysql数据库
+* 图片预览\上传至服务器，暂时只支持单图片通过input上传，粘贴/拖拽上传有过尝试。ps: html5的FileReader特性可直接把图片转化为base64编码
