@@ -1,22 +1,20 @@
 <template>
   <div id="app">
-    <b-navbar toggleable="md" type="dark" variant="info">
+    <b-navbar toggleable="md" type="dark" variant="dark">
     
       <b-nav-toggle target="nav_collapse"></b-nav-toggle>
     
       <b-navbar-brand @click='routeAction("/")'>首页</b-navbar-brand>
     
       <b-collapse is-nav id="nav_collapse">
-    
-        <b-nav is-nav-bar>
+        <!-- Right aligned nav items -->
+        <b-nav is-nav-bar class="ml-auto">
+          <b-button size="sm" variant="info" @click='routeAction("/mdCompiler")'>Markdown编辑器</b-button>
           <b-nav-item-dropdown text="图片" right>
             <b-dropdown-item @click='routeAction("/uploadImage")'>上传图片</b-dropdown-item>
             <b-dropdown-item>查看图片</b-dropdown-item>
           </b-nav-item-dropdown>
-        </b-nav>
-    
-        <!-- Right aligned nav items -->
-        <b-nav is-nav-bar class="ml-auto">
+
           <b-nav-item-dropdown text="todoList" right>
             <b-dropdown-item @click='routeAction("/addTodo")'>新增</b-dropdown-item>
             <b-dropdown-item @click='routeAction("/viewTodo")'>查看</b-dropdown-item>

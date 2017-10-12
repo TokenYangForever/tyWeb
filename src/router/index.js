@@ -4,6 +4,7 @@ import todoList from '@/components/todoList'
 import addTodo from '@/components/addTodo'
 import home from '@/components/home'
 import uploadImage from '@/components/uploadImage'
+import mdCompiler from '@/components/markdownCompiler'
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/uploadImage',
       name: 'uploadImage',
       component: uploadImage
+    },
+    {
+      path: '/mdCompiler',
+      name: 'mdCompiler',
+      component: mdCompiler
     }
   ]
 })
