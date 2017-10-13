@@ -1,8 +1,10 @@
 <template>
   <div>
     <h3>markdown编辑器</h3>
-    <textarea v-model='mdInput' @input='compileMD()'></textarea>
-    <div v-html='compileHtml'></div>
+    <div class="outterWrap">
+      <textarea v-model='mdInput' @input='compileMD()' class="mdText"></textarea>
+      <div v-html='compileHtml' class="htmlArea"></div>
+    </div>
   </div>
 </template>
 
@@ -30,4 +32,28 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.outterWrap {
+  width: 100%;
+  background-color: #f6f6f6;
+  height: 600px;
+}
+.mdText {
+  background-color: #f6f6f6;
+  border: none;
+  border-right: 1px solid #ccc;
+  resize: none;
+  outline: none;
+  display: inline-block;
+  width: 49%;
+  height: 100%;
+  padding: 20px;
+  vertical-align: top;
+}
+.htmlArea {
+  display: inline-block;
+  width: 49%;
+  height: 100%;
+  padding: 20px;
+  vertical-align: top;
+}
 </style>
