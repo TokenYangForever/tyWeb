@@ -21,6 +21,19 @@ app.post('/savetodo', savetodo)
 app.get('/getTodo', getlist)
 app.get('/updateItem', updateItem)
 
+app.post('/jsonp', function (req, res) {
+  // req.query 请求参数
+  let backdata = {
+    result: 'hahaha',
+    query: req.query,
+    code: 200
+  }
+  // let backdata = {
+  // }
+  res.send(`${req.query.callback}(${JSON.stringify(backdata)})`)
+  // res.send(JSON.parse(JSON.stringify(backdata)))
+})
+
 var server = app.listen(8081, function () {
   console.log('Example app listening on port 8081!')
 })
