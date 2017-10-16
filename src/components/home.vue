@@ -16,6 +16,7 @@ export default {
   methods: {
   },
   mounted () {
+    window.vm = this
     const jsonp = function (url, data) {
       return new Promise((resolve, reject) => {
         // 初始化url

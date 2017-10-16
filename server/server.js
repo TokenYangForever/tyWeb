@@ -21,7 +21,7 @@ app.post('/savetodo', savetodo)
 app.get('/getTodo', getlist)
 app.get('/updateItem', updateItem)
 
-app.post('/jsonp', function (req, res) {
+app.get('/jsonp', function (req, res) {
   // req.query 请求参数
   let backdata = {
     result: 'hahaha',
