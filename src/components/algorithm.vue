@@ -40,7 +40,7 @@ export default {
       data: [6, 11, 14, 1, 8, 15, 13, 4, 10, 2, 9, 5, 12, 3, 7],
       method: '冒泡排序',
       current: 0,
-      speed: 500
+      speed: 200
     }
   },
   created () {
