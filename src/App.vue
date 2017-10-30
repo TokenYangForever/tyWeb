@@ -10,6 +10,7 @@
         <!-- Right aligned nav items -->
         <b-nav is-nav-bar class="ml-auto">
           <b-button size="sm" variant="info" @click='routeAction("/mdCompiler")'>Markdown编辑器</b-button>
+
           <b-nav-item-dropdown text="图片" right>
             <b-dropdown-item @click='routeAction("/uploadImage")'>上传图片</b-dropdown-item>
             <b-dropdown-item>查看图片</b-dropdown-item>
@@ -23,10 +24,9 @@
           <b-nav-item-dropdown right>
             <!-- Using button-content slot -->
             <template slot="button-content">
-              <em>User</em>
+              <em>其他</em>
             </template>
-            <b-dropdown-item href="#">Profile</b-dropdown-item>
-            <b-dropdown-item href="#">Signout</b-dropdown-item>
+            <b-dropdown-item @click='routeAction("/algorithm")'>排序算法</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-nav>
         
