@@ -15,6 +15,7 @@
     <div>
       <b-button size="sm" variant="info" @click='startAction'>开始</b-button>
       <b-button size="sm" variant="info" @click='resetAction'>重置</b-button>
+      <p v-if='sort.length > 0'>一共替换了{{sort.length}}次</p>
     </div>
   </div>
 </template>
@@ -38,20 +39,22 @@ export default {
         500
       ],
       data: [6, 11, 14, 1, 8, 15, 13, 4, 10, 2, 9, 5, 12, 3, 7],
-      // data: [1, 2, 3, 4, 5, 6],
+      sort: [], // 这个数组用来表示替换过程
       method: '冒泡排序',
       current: [0],
       speed: 200
     }
   },
   created () {
-    this.initial = [6, 11, 14, 1, 8, 15, 13, 4, 10, 2, 9, 5, 12, 3, 7]
-    this.sort = []
+    this.initial = [...this.data]
   },
   methods: {
     startAction () {
       this.sort = []
-      this[METHOD_MAP[this.method]]()
+      let { method } = this
+      console.time(`${method}`)
+      this[METHOD_MAP[method]]()
+      console.timeEnd(`${method}`)
       this.sortAction()
     },
     resetAction () {
@@ -76,37 +79,20 @@ export default {
       }, this.speed)
     },
     swap (arr, i, j) {
-      let data = this.data
-      let temp = data[j]
+      let temp = arr[j]
       arr[j] = arr[i]
       arr[i] = temp
-      data.splice(j, 1, data[i])
-      data.splice(i, 1, temp)
     },
     bubbleSort () {
-      let {data, speed} = this
-      let arr = [...data]
-      let i = 0
-      console.time('bubble')
-      let outTimeer = setInterval(() => {
-        let j = 0
-        let timeer = setInterval(() => {
+      let arr = [...this.data]
+      for (let i = 0; i < arr.length; i++) {
+        for (let j = 0; j < arr.length - i; j++) {
           if (arr[j] > arr[j + 1]) {
+            this.sort.push([j, j + 1])
             this.swap(arr, j, j + 1)
           }
-          this.current = [j, ++j]
-          if (j >= arr.length - 1 - i) {
-            clearInterval(timeer)
-            if (j === arr.length - 1 - i) {
-              i += 1
-            }
-          }
-        }, speed)
-        if (i >= arr.length - 1) {
-          clearInterval(outTimeer)
-          console.timeEnd('bubble')
         }
-      }, speed)
+      }
     },
     fastSort () {
       let array = [...this.data]
@@ -118,7 +104,6 @@ export default {
       let flag = array[prev]
       if ((numsize - prev) > 1) {
         while (nonius < j) {
-          console.log('dida')
           for (; nonius < j; j--) {
             if (array[j] < flag) {
               this.sort.push([nonius, j])
