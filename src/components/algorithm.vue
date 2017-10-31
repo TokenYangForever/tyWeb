@@ -15,7 +15,7 @@
     <div>
       <b-button size="sm" variant="info" @click='startAction'>开始</b-button>
       <b-button size="sm" variant="info" @click='resetAction'>重置</b-button>
-      <p v-if='sort.length > 0'>一共替换了{{sort.length}}次</p>
+      <p v-if='sort.length > 0'>一共需要替换{{sort.length}}次</p>
     </div>
   </div>
 </template>
