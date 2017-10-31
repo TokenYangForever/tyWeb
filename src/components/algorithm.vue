@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="tableAxis">
-      <span class="tableCell" :class="{ active: index === current }" :style="{ height: item*20 + 'px', marginTop: 400-item*20 + 'px' }" v-for="(item, index) in data"><em class="tableCellIndex">{{item}}</em></span>
+      <span class="tableCell" :class="{ active: current.includes(index) }" :style="{ height: item*20 + 'px', marginTop: 400-item*20 + 'px' }" v-for="(item, index) in data"><em class="tableCellIndex">{{item}}</em></span>
     </div>
     <div class="selectWrap">
       <span>排序方法</span>
@@ -38,8 +38,9 @@ export default {
         500
       ],
       data: [6, 11, 14, 1, 8, 15, 13, 4, 10, 2, 9, 5, 12, 3, 7],
+      // data: [1, 2, 3, 4, 5, 6],
       method: '冒泡排序',
-      current: 0,
+      current: [0],
       speed: 200
     }
   },
@@ -49,11 +50,30 @@ export default {
   },
   methods: {
     startAction () {
+      this.sort = []
       this[METHOD_MAP[this.method]]()
-      // this.bubbleSort()
+      this.sortAction()
     },
     resetAction () {
       this.data = [...this.initial]
+      this.sort = []
+    },
+    sortAction () {
+      let data = this.data
+      if (!this.sort.length) {
+        return
+      }
+      let sortArr = [...this.sort]
+      let timeer = setInterval(() => {
+        let item = sortArr.shift()
+        let temp = data[item[0]]
+        this.current = [item[0], item[1]]
+        data.splice(item[0], 1, data[item[1]])
+        data.splice(item[1], 1, temp)
+        if (sortArr.length === 0) {
+          clearInterval(timeer)
+        }
+      }, this.speed)
     },
     swap (arr, i, j) {
       let data = this.data
@@ -67,14 +87,14 @@ export default {
       let {data, speed} = this
       let arr = [...data]
       let i = 0
+      console.time('bubble')
       let outTimeer = setInterval(() => {
         let j = 0
         let timeer = setInterval(() => {
           if (arr[j] > arr[j + 1]) {
             this.swap(arr, j, j + 1)
           }
-          j += 1
-          this.current = j
+          this.current = [j, ++j]
           if (j >= arr.length - 1 - i) {
             clearInterval(timeer)
             if (j === arr.length - 1 - i) {
@@ -84,10 +104,41 @@ export default {
         }, speed)
         if (i >= arr.length - 1) {
           clearInterval(outTimeer)
+          console.timeEnd('bubble')
         }
       }, speed)
     },
-    fastSort () {}
+    fastSort () {
+      let array = [...this.data]
+      this.fsSubFunc(array, 0, array.length)
+    },
+    fsSubFunc (array, prev, numsize) {
+      let nonius = prev
+      let j = numsize - 1
+      let flag = array[prev]
+      if ((numsize - prev) > 1) {
+        while (nonius < j) {
+          console.log('dida')
+          for (; nonius < j; j--) {
+            if (array[j] < flag) {
+              this.sort.push([nonius, j])
+              array[nonius++] = array[j]
+              break
+            }
+          }
+          for (; nonius < j; nonius++) {
+            if (array[nonius] > flag) {
+              this.sort.push([j, nonius])
+              array[j--] = array[nonius]
+              break
+            }
+          }
+        }
+        array[nonius] = flag
+        this.fsSubFunc(array, 0, nonius)
+        this.fsSubFunc(array, nonius + 1, numsize)
+      }
+    }
   },
   mounted () {
   }
