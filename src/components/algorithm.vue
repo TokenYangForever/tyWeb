@@ -23,16 +23,15 @@
 <script>
 const METHOD_MAP = {
   '冒泡排序': 'bubbleSort',
-  '快速排序': 'fastSort'
+  '快速排序': 'fastSort',
+  '插入排序': 'insertSort',
+  '选择排序': 'chooseSort'
 }
 export default {
   name: 'algorithm',
   data () {
     return {
-      options: [
-        '冒泡排序',
-        '快速排序'
-      ],
+      options: Object.keys(METHOD_MAP),
       sOpts: [
         100,
         200,
@@ -42,18 +41,25 @@ export default {
       sort: [], // 这个数组用来表示替换过程
       method: '冒泡排序',
       current: [0],
-      speed: 200
+      speed: 200,
+      flag: false
     }
   },
   created () {
+    window.vm = this
     this.initial = [...this.data]
   },
   methods: {
     startAction () {
+      let {data} = this
+      if (this.flag) {
+        return
+      }
+      this.flag = true
       this.sort = []
       let { method } = this
       console.time(`${method}`)
-      this[METHOD_MAP[method]]()
+      this[METHOD_MAP[method]]([...data])
       console.timeEnd(`${method}`)
       this.sortAction()
     },
@@ -62,11 +68,11 @@ export default {
       this.sort = []
     },
     sortAction () {
-      let data = this.data
-      if (!this.sort.length) {
+      let {sort, data, speed} = this
+      if (!sort.length) {
         return
       }
-      let sortArr = [...this.sort]
+      let sortArr = [...sort]
       let timeer = setInterval(() => {
         let item = sortArr.shift()
         let temp = data[item[0]]
@@ -74,28 +80,50 @@ export default {
         data.splice(item[0], 1, data[item[1]])
         data.splice(item[1], 1, temp)
         if (sortArr.length === 0) {
+          this.flag = false
           clearInterval(timeer)
         }
-      }, this.speed)
+      }, speed)
     },
     swap (arr, i, j) {
       let temp = arr[j]
       arr[j] = arr[i]
       arr[i] = temp
+      this.sort.push([i, j])
     },
-    bubbleSort () {
-      let arr = [...this.data]
+    chooseSort (arr) {
+      let minIndex = 0
+      for (let i = 0; i < arr.length; i++) {
+        minIndex = i
+        for (let j = i + 1; j < arr.length; j++) {
+          if (arr[j] < arr[minIndex]) {
+            minIndex = j
+          }
+        }
+        if (minIndex !== i) {
+          this.swap(arr, minIndex, i)
+        }
+      }
+    },
+    bubbleSort (arr) {
       for (let i = 0; i < arr.length; i++) {
         for (let j = 0; j < arr.length - i; j++) {
           if (arr[j] > arr[j + 1]) {
-            this.sort.push([j, j + 1])
             this.swap(arr, j, j + 1)
           }
         }
       }
     },
-    fastSort () {
-      let array = [...this.data]
+    insertSort (arr) {
+      for (let i = 0; i < arr.length; i++) {
+        for (let j = i; j > 0; j--) {
+          if (arr[j] < arr[j - 1]) {
+            this.swap(arr, j, j - 1)
+          }
+        }
+      }
+    },
+    fastSort (array) {
       this.fsSubFunc(array, 0, array.length)
     },
     fsSubFunc (array, prev, numsize) {
