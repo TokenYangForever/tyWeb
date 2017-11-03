@@ -1,7 +1,8 @@
 <template>
   <div>
-    <p>服务器的时间：{{date}}</p>
-    <b-form-input v-model.trim="nickName" type="text" placeholder="输入你的昵称"></b-form-input>
+    <!-- <b-form-input v-model.trim="nickName" type="text" placeholder="输入你的昵称"></b-form-input> -->
+    <p>{{nickName}}</p>
+    <p>当前聊天室人数：{{counts}}</p>
     <b-form-input v-model.trim="description" type="text" placeholder="这里输入描述"></b-form-input>
     <b-button :variant="'primary'" @click = 'loadAction'>
       发送
@@ -19,8 +20,8 @@ export default {
   data () {
     return {
       description: '',
-      date: '',
       nickName: '',
+      counts: 1,
       msg: []
     }
   },
@@ -31,10 +32,14 @@ export default {
       console.log('已连接到服务器')
       this.socket = socket
     })
-    socket.on('update date', (date) => { this.date = new Date(date) })
     socket.on('send nickName', (name) => { this.nickName = name })
-    socket.on('message from server', (data) => { this.msg.push(data) })
-    socket.on('disconnect', () => { console.log('disconnect') })
+    socket.on('message from server', ({data, nName, counts}) => {
+      this.msg.push(data)
+      this.counts = counts
+    })
+    socket.on('disconnect', () => {
+      // 服务端disconnect了
+    })
   },
   methods: {
     loadAction () {

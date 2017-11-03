@@ -31,23 +31,38 @@ app.get('/todo/updateItem', updateItem)
 var server = app.listen(8081, function () {
   console.log('Example app listening on port 8081!')
 })
-
+let peopleCounts = 0
+let his = [] // 要想查看之前的聊天记录，可以用这个数组存储，connection的时候把它传过去
 let io = require('socket.io')(server)
 io.on('connection', function (client) {
+  ++peopleCounts
+  let uname = ''
+
   client.on('event', function (data) {})
-  client.on('disconnect', function () {
+
+  client.on('disconnect', function (e) {
+    --peopleCounts
+    io.emit('message from server', {
+      data: `系统消息: "${uname}"离开聊天室`,
+      counts: peopleCounts
+    })
   })
+
   require('./methods/getNickName')()
-    .then(name => { io.emit('send nickName', name) })
+    .then(name => {
+      uname = name
+      io.emit('send nickName', name)
+      io.emit('message from server', {
+        data: `系统消息: "${name}"进入聊天室`,
+        counts: peopleCounts
+      })
+    })
     .catch(e => { console.log(e) })
-  // require('./methods/getNickName')((name) => {
-  //   io.emit('send nickName', name)
-  // })
-  setInterval(() => {
-    io.emit('update date', Date.now())
-  }, 5000)
 
   client.on('chat message', function (data) {
-    io.emit('message from server', data)
+    io.emit('message from server', {
+      data,
+      counts: peopleCounts
+    })
   })
 })
