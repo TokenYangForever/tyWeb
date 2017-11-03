@@ -37,10 +37,12 @@ io.on('connection', function (client) {
   client.on('event', function (data) {})
   client.on('disconnect', function () {
   })
-  // require('./methods/getNickName')()
-  require('./methods/getNickName')((name) => {
-    io.emit('send nickName', name)
-  })
+  require('./methods/getNickName')()
+    .then(name => { io.emit('send nickName', name) })
+    .catch(e => { console.log(e) })
+  // require('./methods/getNickName')((name) => {
+  //   io.emit('send nickName', name)
+  // })
   setInterval(() => {
     io.emit('update date', Date.now())
   }, 5000)
