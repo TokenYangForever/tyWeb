@@ -51,13 +51,12 @@ export default {
   },
   methods: {
     startAction () {
-      let {data} = this
+      let {data, method} = this
       if (this.flag) {
         return
       }
       this.flag = true
       this.sort = []
-      let { method } = this
       console.time(`${method}`)
       this[METHOD_MAP[method]]([...data])
       console.timeEnd(`${method}`)

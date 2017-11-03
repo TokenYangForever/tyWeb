@@ -43,7 +43,7 @@ export default {
     }
   },
   created () {
-    this.axios.get(`${this._config().preurl}getTodo`).then((response) => {
+    this.axios.get(`${this._config().preurl}todo/getTodo`).then((response) => {
       let result = response.data.result
       for (let key in result) {
         // result[key] = util.pick(result[key], ['title', 'description', 'statu'])
@@ -63,7 +63,7 @@ export default {
       let listitem = this.todoData.find((val) => itemid === val.itemid)
       let changeStatu = listitem.statu === 'done' ? 'unsolve' : 'done'
       let changeVariant = listitem.statu === 'done' ? 'warning' : 'success'
-      this.axios.get(`${this._config().preurl}updateItem?statu=${changeStatu}&serid=${itemid}`)
+      this.axios.get(`${this._config().preurl}todo/updateItem?statu=${changeStatu}&serid=${itemid}`)
       .then((data) => {
         data = data.data
         if (data.code === 200) {

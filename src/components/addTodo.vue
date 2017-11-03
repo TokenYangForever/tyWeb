@@ -45,7 +45,7 @@ export default {
       if (this.nameState || this.desState) {
         return
       }
-      this.axios.post(`${this._config().preurl}savetodo`, {
+      this.axios.post(`${this._config().preurl}todo/savetodo`, {
         title: this.title,
         description: this.description
       }).then((response) => {
