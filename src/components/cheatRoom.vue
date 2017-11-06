@@ -47,11 +47,13 @@ export default {
       console.log(e)
     },
     initSocket () {
-      const socket = io('http://localhost:8081')
+      const socket = io(this._config().preurl)
       socket.on('connect', () => {
         this.socket = socket
       })
-      socket.on('initUser', ({name, color}) => {
+      // 这里api语法类似于jQuery,支持once监听一次,off取消监听
+      // [https://socket.io/docs/client-api/#socket-on-eventname-callback](https://socket.io/docs/client-api/#socket-on-eventname-callback)
+      socket.once('initUser', ({name, color}) => {
         this.nickName = name
         this.color = color
       })
