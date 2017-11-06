@@ -63,6 +63,9 @@ export default {
       this.sortAction()
     },
     resetAction () {
+      if (this.flag) {
+        return
+      }
       this.data = [...this.initial]
       this.sort = []
     },
