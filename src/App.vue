@@ -26,6 +26,7 @@
             <template slot="button-content">
               <em>其他</em>
             </template>
+            <b-dropdown-item @click='routeAction("/cheatRoom")'>socket.io聊天室</b-dropdown-item>
             <b-dropdown-item @click='routeAction("/algorithm")'>排序算法</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-nav>
@@ -125,5 +126,9 @@ i {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+* {
+  margin: 0;
+  padding: 0;
 }
 </style>

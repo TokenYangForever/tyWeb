@@ -6,6 +6,7 @@ import home from '@/components/home'
 import uploadImage from '@/components/uploadImage'
 import mdCompiler from '@/components/markdownCompiler'
 import algorithm from '@/components/algorithm'
+import cheatRoom from '@/components/cheatRoom'
 
 Vue.use(Router)
 
@@ -40,6 +41,11 @@ export default new Router({
       path: '/algorithm',
       name: 'algorithm',
       component: algorithm
+    },
+    {
+      path: '/cheatRoom',
+      name: 'cheatRoom',
+      component: cheatRoom
     }
   ]
 })
