@@ -2,6 +2,8 @@
 
 > A Vue.js project
 
+自定义命令: gitPUSH
+
 ## 一个自己写着玩的vue demo
 ### 目前实现功能：
 * todolist：查看\添加\修改状态，链接node服务器mysql数据库
