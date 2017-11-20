@@ -11,7 +11,7 @@ module.exports = function (req, res) {
     res.send(backdata)
   }
   let base64 = imgUrl.replace(/^data:image\/\w+;base64,/, '')// 去掉图片base64码前面部分data:image/png;base64
-  let dataBuffer = Buffer.from(base64, 'base64') // 把base64码转成buffer对象，
+  let dataBuffer = Buffer.from(base64, 'base64') // 把base64码转成buffer对象
   fs.writeFile(`./${Date.now()}_${imgName}.png`, dataBuffer, function (err) {
     if (err) {
       backdata.err = err

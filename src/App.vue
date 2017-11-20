@@ -13,7 +13,6 @@
 
           <b-nav-item-dropdown text="图片" right>
             <b-dropdown-item @click='routeAction("/uploadImage")'>上传图片</b-dropdown-item>
-            <b-dropdown-item>查看图片</b-dropdown-item>
           </b-nav-item-dropdown>
 
           <b-nav-item-dropdown text="todoList" right>
