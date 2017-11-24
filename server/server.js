@@ -1,10 +1,6 @@
 let fs = require('fs')
 let bodyParser = require('body-parser')
 let app = new (require('express'))()
-let https = require('https')
-let privateKey = fs.readFileSync('./private.pem', 'utf8')
-let certificate = fs.readFileSync('./file.crt', 'utf8')
-let credentials = {key: privateKey, cert: certificate}
 
 app.use(bodyParser.json({limit: '2000kb'}))
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -14,6 +10,7 @@ app.use('/', function (req, res, next) {
   next()
 })
 
+app.post('/saveImgUrl', require('./methods/saveImage'))
 app.post('/uploadimg', require('./methods/uploadimg'))
 app.post('/todo/savetodo', require('./methods/saveTodo'))
 app.get('/todo/getTodo', require('./methods/getlist'))
@@ -57,5 +54,3 @@ const server = app.listen(8081, () => {
   })
   console.log('Example app listening on port 8081!')
 })
-
-https.createServer(credentials, app).listen(8082)

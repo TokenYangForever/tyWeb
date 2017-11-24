@@ -100,7 +100,7 @@ export default {
       if (!longUrl || !shortUrl || !description) {
         return
       }
-      this.axios.post(`${this._config().preurl}todo/saveImgUrl`, {
+      this.axios.post(`${this._config().preurl}saveImgUrl`, {
         longUrl,
         shortUrl,
         description
@@ -113,8 +113,10 @@ export default {
           autoClose: true,
           type: 'success'
         })
-        this.cleanAction()
-      }).catch(() => {
+        this.cleanInput()
+      }).catch((e) => {
+        console.log(e)
+        this.cleanInput()
         this.showAlert({
           msg: '接口异常，请联系管理员Token',
           type: 'error'
