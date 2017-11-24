@@ -6,6 +6,18 @@
     <b-button :variant="'primary'" @click = 'uploadAction()'>
       上传
     </b-button>
+    <hr>
+    <div>
+      <h4>把网络图片存入服务器数据库</h4>
+      <ul>
+        <li class="inputLi">长链接：<input type="text" v-model='longUrl'></li>
+        <li class="inputLi">短连接：<input type="text" v-model='shortUrl'></li>
+        <li class="inputLi">描述：<input type="text" v-model='description'></li>
+      </ul>
+      <b-button :variant="'primary'" @click = 'addAction()'>
+        存入数据库
+      </b-button>
+    </div>
   </div>
 </template>
 
@@ -17,10 +29,14 @@ export default {
       preViewUrl: '',
       base64: '',
       isImage: false,
-      imgName: ''
+      imgName: '',
+      longUrl: '',
+      shortUrl: '',
+      description: ''
     }
   },
   created () {
+    window.vm = this
   },
   methods: {
     checkFile () {
@@ -73,11 +89,37 @@ export default {
       })
     },
     cleanInput () {
-      this.preViewUrl = ''
       document.querySelector('#fileLoader').value = ''
+      this.preViewUrl = this.longUrl = this.shortUrl = this.description = ''
     },
     imageVaild (type) {
       return /\/(png|jpg|gif|jpeg)$/.test(type)
+    },
+    addAction () {
+      let {longUrl, shortUrl, description} = this
+      if (!longUrl || !shortUrl || !description) {
+        return
+      }
+      this.axios.post(`${this._config().preurl}todo/saveImgUrl`, {
+        longUrl,
+        shortUrl,
+        description
+      }).then((response) => {
+        if (response.data.err) {
+          return Promise.reject()
+        }
+        this.showAlert({
+          msg: '操作成功~',
+          autoClose: true,
+          type: 'success'
+        })
+        this.cleanAction()
+      }).catch(() => {
+        this.showAlert({
+          msg: '接口异常，请联系管理员Token',
+          type: 'error'
+        })
+      })
     }
   },
   mounted () {
@@ -90,5 +132,8 @@ export default {
 #preView{
   width: 300px;
   height: 300px;
+}
+.inputLi{
+  margin-bottom: 10px;
 }
 </style>

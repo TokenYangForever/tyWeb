@@ -42,12 +42,13 @@ export default {
   },
   methods: {
     loadAction () {
+      let {title, description} = this
       if (this.nameState || this.desState) {
         return
       }
       this.axios.post(`${this._config().preurl}todo/savetodo`, {
-        title: this.title,
-        description: this.description
+        title,
+        description
       }).then((response) => {
         if (response.data.err) {
           return Promise.reject()
@@ -67,8 +68,7 @@ export default {
       })
     },
     cleanAction () {
-      this.title = ''
-      this.description = ''
+      this.title = this.description = ''
     }
   },
   computed: {

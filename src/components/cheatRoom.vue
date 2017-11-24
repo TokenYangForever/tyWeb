@@ -17,7 +17,6 @@
     <b-button :variant="'primary'" size="sm"  @click='loadAction'>
       发送
     </b-button>
-    <!-- <b-form-input v-model.trim="description" type="text" placeholder="这里输入描述" @keyup.enter="loadAction"></b-form-input> -->
     <p style="margin-top: 20px">你的昵称是：{{nickName}}。   当前聊天室人数：{{counts}}</p>
   </div>
 </template>
@@ -37,7 +36,9 @@ export default {
   },
   created () {
     window.vm = this
-    this.initSocket()
+    if (!this.socket) {
+      this.initSocket()
+    }
   },
   mounted () {
     this.scrollUl = document.querySelector('.cr-ul')
@@ -69,11 +70,6 @@ export default {
         this.msg.push(item)
       })
       socket.on('disconnect', () => {
-        this.showAlert({
-          msg: '服务端断开连接，请联系管理员Token',
-          autoClose: false,
-          type: 'error'
-        })
       })
     },
     loadAction () {
@@ -95,6 +91,10 @@ export default {
     changeName ({target}) {
       this.nickName = target.childNodes[0].data
     }
+  },
+  beforeDestroy () {
+    // socket链接与vue生命周期绑定，vue销毁时手动断开socket链接
+    this.socket.close()
   }
 }
 </script>

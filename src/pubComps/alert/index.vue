@@ -21,7 +21,7 @@ const Class_map = {
       return {
         isOpen: true,
         delay: this.options.delay || 3000,
-        autoClose: this.options.autoClose,
+        autoClose: this.options.autoClose || false,
         type: this.options.type || 'default'
       }
     },
