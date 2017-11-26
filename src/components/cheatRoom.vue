@@ -68,6 +68,9 @@ export default {
       socket.on('message from server', (item) => {
         item.sys = false
         this.msg.push(item)
+        this.$nextTick(() => {
+          this.scrollToBottom()
+        })
       })
       socket.on('disconnect', () => {
       })
