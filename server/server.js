@@ -15,8 +15,9 @@ app.post('/uploadimg', require('./methods/uploadimg'))
 app.post('/todo/savetodo', require('./methods/saveTodo'))
 app.get('/todo/getTodo', require('./methods/getlist'))
 app.get('/todo/updateItem', require('./methods/saveById'))
+app.get('/sudo/getSudo', require('./methods/getSudo'))
 
-const server = app.listen(8081, () => {
+const server = app.listen(8083, () => {
   let peopleCounts = 0
   let his = [] // 要想查看之前的聊天记录，可以用这个数组存储，connection的时候把它传过去
   let io = require('socket.io')(server)
