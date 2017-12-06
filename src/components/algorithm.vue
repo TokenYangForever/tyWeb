@@ -5,16 +5,16 @@
     </div>
     <div class="selectWrap">
       <span>排序方法</span>
-      <b-form-select v-model="method" :options="options" class="mSelect"></b-form-select>
+      <b-form-select v-model="method" :options="options" class="mSelect" :disabled="flag"></b-form-select>
     </div>
     <div class="selectWrap">
       <span>动画速度</span>
-      <b-form-select v-model="speed" :options="sOpts" class="mSelect"></b-form-select>
+      <b-form-select v-model="speed" :options="sOpts" class="mSelect" :disabled="flag"></b-form-select>
     </div>
     
     <div>
-      <b-button size="sm" variant="info" @click='startAction'>开始</b-button>
-      <b-button size="sm" variant="info" @click='resetAction'>重置</b-button>
+      <b-button size="sm" variant="info" @click='startAction' :disabled="flag">开始</b-button>
+      <b-button size="sm" variant="info" @click='resetAction' :disabled="flag">重置</b-button>
       <p v-if='sort.length > 0'>一共需要替换{{sort.length}}次</p>
     </div>
   </div>
@@ -52,9 +52,6 @@ export default {
   methods: {
     startAction () {
       let {data, method} = this
-      if (this.flag) {
-        return
-      }
       this.flag = true
       this.sort = []
       console.time(`${method}`)
@@ -63,9 +60,6 @@ export default {
       this.sortAction()
     },
     resetAction () {
-      if (this.flag) {
-        return
-      }
       this.data = [...this.initial]
       this.sort = []
     },
