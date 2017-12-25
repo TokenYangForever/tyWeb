@@ -61,4 +61,9 @@ export default {
     animation: blink 0.3s infinite;
     animation-direction: alternate;
 }
+@keyframes blink {
+    100% {
+        opacity: 0;
+    }
+}
 </style>
