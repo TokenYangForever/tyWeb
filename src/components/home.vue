@@ -1,6 +1,13 @@
 <template>
   <div>
     <p>{{msg}}<span class="ityped-cursor">|</span></p>
+    <template v-if='todayList.length > 0'>
+      <h3>历史上的今天</h3>
+      <div v-for="(item, index) in todayList" :key='index'>
+        <img :src="item.src">
+        <p><span>{{item.year}}</span>{{item.title}}</p>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -11,10 +18,20 @@ export default {
     return {
       msg: '',
       msgIndex: 0,
-      deleteFlag: false
+      deleteFlag: false,
+      todayList: []
     }
   },
   created () {
+    this.axios.get(`${this._config().pyUrl}historyToday`).then((response) => {
+      this.todayList = response.data.result
+    }).catch(() => {
+      this.showAlert({
+        msg: '接口异常，请联系管理员Token',
+        autoClose: false,
+        type: 'error'
+      })
+    })
   },
   methods: {
     inputAction () {
@@ -45,7 +62,7 @@ export default {
       '暂时没想好要写什么',
       '嘛~就这样吧'
     ]
-    this.inputAction()
+    // this.inputAction()
   }
 }
 </script>
