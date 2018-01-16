@@ -23,8 +23,8 @@ export default {
     }
   },
   created () {
-    this.axios.get(`${this._config().pyUrl}historyToday`).then((response) => {
-      this.todayList = response.data.result
+    this.axios.get(`${this._config().preurl}historyToday/getToday`).then((response) => {
+      this.todayList = JSON.parse(response.data.result)
     }).catch(() => {
       this.showAlert({
         msg: '接口异常，请联系管理员Token',

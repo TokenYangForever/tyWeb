@@ -16,6 +16,7 @@ app.post('/todo/savetodo', require('./methods/saveTodo'))
 app.get('/todo/getTodo', require('./methods/getlist'))
 app.get('/todo/updateItem', require('./methods/saveById'))
 app.get('/sudo/getSudo', require('./methods/getSudo'))
+app.get('/historyToday/getToday', require('./methods/gettoday'))
 
 const server = app.listen(8081, () => {
   let peopleCounts = 0
