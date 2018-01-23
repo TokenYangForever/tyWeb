@@ -23,7 +23,8 @@ export default {
     }
   },
   created () {
-    this.axios.get(`${this._config().preurl}historyToday/getToday`).then((response) => {
+    let reqDate = new Date().getMonth() + 1 + String(new Date().getDate())
+    this.axios.get(`${this._config().preurl}historyToday/getToday?date=${reqDate}`).then((response) => {
       this.todayList = JSON.parse(response.data.result)
     }).catch(() => {
       this.showAlert({

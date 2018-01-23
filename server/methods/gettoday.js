@@ -5,7 +5,7 @@ module.exports = function (req, res) {
   let backdata = {
     result: []
   }
-  let qstring = 'SELECT * FROM tydatabase.history_today WHERE date = "11"'
+  let qstring = `SELECT * FROM tydatabase.history_today WHERE date = "${req.query.date}"`
   connection.query(qstring, function (err, rs) {
     if (err) {
       console.log(`[query] - :${err}`)
