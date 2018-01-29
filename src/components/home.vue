@@ -3,9 +3,9 @@
     <p>{{msg}}<span class="ityped-cursor">|</span></p>
     <template v-if='todayList.length > 0'>
       <h3>历史上的今天</h3>
-      <div v-for="(item, index) in todayList" :key='index'>
-        <img :src="item.src">
-        <p><span>{{item.year}}</span>{{item.title}}</p>
+      <div class='td-item' v-for="(item, index) in todayList" :key='index'>
+        <img class='td-img' :src="item.src">
+        <div class='td-title'><span>{{item.year}}</span>{{item.title}}</div>
       </div>
     </template>
   </div>
@@ -60,16 +60,34 @@ export default {
   mounted () {
     this.msgArr = [
       '这里是光秃秃的首页',
-      '暂时没想好要写什么',
+      '暂时显示的历史上的今天',
       '嘛~就这样吧'
     ]
-    // this.inputAction()
+    this.inputAction()
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.td-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding-left: 10%;
+  margin: 30px
+}
+.td-img {
+  width: 200px;
+  height: 200px;
+}
+.td-title {
+  margin-left: 20px;
+  text-align: left;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
 .ityped-cursor {
     font-size: 1.1rem;
     color: #888;
