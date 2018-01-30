@@ -52,9 +52,6 @@ export default {
         }
       }
       this.addTimmer = setTimeout(this.inputAction, this.deleteFlag ? 150 : 300)
-    },
-    deleteAction () {
-
     }
   },
   mounted () {
@@ -78,8 +75,8 @@ export default {
   margin: 30px
 }
 .td-img {
-  width: 200px;
-  height: 200px;
+  width: 20%;
+  height: 20%;
 }
 .td-title {
   margin-left: 20px;
