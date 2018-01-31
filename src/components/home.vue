@@ -5,7 +5,7 @@
       <h3>历史上的今天</h3>
       <div class='td-item' v-for="(item, index) in todayList" :key='index'>
         <img class='td-img' :src="item.src">
-        <div class='td-title'><span>{{item.year}}</span>{{item.title}}</div>
+        <div class='td-title' @click="searchAction(item.title)"><p>{{item.year}}</p>{{item.title}}</div>
       </div>
     </template>
   </div>
@@ -35,6 +35,9 @@ export default {
     })
   },
   methods: {
+    searchAction (title) {
+      location.href = `https://www.baidu.com/s?wd=${title}`
+    },
     inputAction () {
       if (this.deleteFlag) {
         if (this.msg.length) {
