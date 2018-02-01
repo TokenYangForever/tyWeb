@@ -23,7 +23,8 @@ export default {
     }
   },
   created () {
-    let reqDate = new Date().getMonth() + 1 + String(new Date().getDate())
+    let day = new Date().getDate() < 10 ? '0' + new Date().getDate() : new Date().getDate() + ''
+    let reqDate = new Date().getMonth() + 1 + day
     this.axios.get(`${this._config().preurl}historyToday/getToday?date=${reqDate}`).then((response) => {
       this.todayList = JSON.parse(response.data.result)
     }).catch(() => {
