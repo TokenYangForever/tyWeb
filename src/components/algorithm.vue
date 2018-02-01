@@ -170,6 +170,12 @@ export default {
   background-color: #333;
   bottom: 0;
 }
+@media (max-device-width: 375px) {
+  .tableCell {
+    width: 14px;
+    margin-left: 8px;
+  }
+}
 .tableCellIndex {
   position: absolute;
   bottom: -24px;
