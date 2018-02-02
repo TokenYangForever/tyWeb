@@ -36,6 +36,7 @@ export default {
     }
   },
   created () {
+    this._setTitle('uploadImg')
     window.vm = this
   },
   methods: {

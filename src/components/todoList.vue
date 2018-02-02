@@ -43,6 +43,7 @@ export default {
     }
   },
   created () {
+    this._setTitle('todoList')
     this.axios.get(`${this._config().preurl}todo/getTodo`).then((response) => {
       let result = response.data.result
       for (let key in result) {

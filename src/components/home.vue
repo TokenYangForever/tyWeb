@@ -23,6 +23,7 @@ export default {
     }
   },
   created () {
+    this._setTitle('homepage')
     let day = new Date().getDate() < 10 ? '0' + new Date().getDate() : new Date().getDate() + ''
     let reqDate = new Date().getMonth() + 1 + day
     this.axios.get(`${this._config().preurl}historyToday/getToday?date=${reqDate}`).then((response) => {

@@ -46,6 +46,7 @@ export default {
     }
   },
   created () {
+    this._setTitle('algorithm')
     window.vm = this
     this.initial = [...this.data]
   },

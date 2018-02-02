@@ -35,6 +35,7 @@ export default {
     }
   },
   created () {
+    this._setTitle('cheatRoom')
     window.vm = this
     if (!this.socket) {
       this.initSocket()

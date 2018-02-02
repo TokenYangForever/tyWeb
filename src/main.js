@@ -23,6 +23,9 @@ Vue.mixin({
     },
     _config () {
       return config
+    },
+    _setTitle (name) {
+      document.title = name
     }
   }
 })

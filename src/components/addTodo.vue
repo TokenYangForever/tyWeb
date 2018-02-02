@@ -39,6 +39,7 @@ export default {
     }
   },
   created () {
+    this._setTitle('addTodo')
   },
   methods: {
     loadAction () {

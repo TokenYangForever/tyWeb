@@ -19,6 +19,7 @@ export default {
     }
   },
   created () {
+    this._setTitle('mdCompiler')
   },
   methods: {
     compileMD () {
