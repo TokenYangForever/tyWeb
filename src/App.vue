@@ -25,6 +25,7 @@
             <template slot="button-content">
               <em>其他</em>
             </template>
+            <b-dropdown-item @click='routeAction("/historyToday")'>历史上的今天</b-dropdown-item>
             <b-dropdown-item @click='routeAction("/cheatRoom")'>socket.io聊天室</b-dropdown-item>
             <b-dropdown-item @click='routeAction("/algorithm")'>排序算法</b-dropdown-item>
           </b-nav-item-dropdown>

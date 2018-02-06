@@ -1,18 +1,9 @@
 <template>
   <div>
-    <p>{{msg}}<span class="ityped-cursor">|</span></p>
-    <template v-if='todayList.length > 0'>
-      <h3>历史上的今天</h3>
-<!--       <div class='td-item' v-for="(item, index) in todayList" :key='index'>
-        <img class='td-img' :src="item.src">
-        <div class='td-title' @click="searchAction(item.title)">{{item.year}}<p class='td-p'>{{item.title}}</p></div>
-      </div> -->
-    </template>
-    <div class="home-bg">
-      <video class="home-video" :height="vHeight" loop="loop" autoplay="autoplay" muted="muted">
-        <source src="../assets/video/background.mp4" type="video/mp4">
-      </video>
-    </div>
+    <h3 class="home-head">{{msg}}<span class="ityped-cursor">|</span></h3>
+    <video class="home-video" loop="loop" autoplay="autoplay" muted="muted">
+      <source src="../assets/video/background.mp4" type="video/mp4">
+    </video>
   </div>
 </template>
 
@@ -23,30 +14,13 @@ export default {
     return {
       msg: '',
       msgIndex: 0,
-      deleteFlag: false,
-      todayList: [],
-      vHeight: window.innerHeight,
-      vWidth: window.innerWidth
+      deleteFlag: false
     }
   },
   created () {
-    this._setTitle('homepage')
-    let day = new Date().getDate() < 10 ? '0' + new Date().getDate() : new Date().getDate() + ''
-    let reqDate = new Date().getMonth() + 1 + day
-    this.axios.get(`${this._config().preurl}historyToday/getToday?date=${reqDate}`).then((response) => {
-      this.todayList = JSON.parse(response.data.result)
-    }).catch(() => {
-      this.showAlert({
-        msg: '接口异常，请联系管理员Token',
-        autoClose: false,
-        type: 'error'
-      })
-    })
+    this._setTitle('首页')
   },
   methods: {
-    searchAction (title) {
-      location.href = `https://www.baidu.com/s?wd=${title}`
-    },
     inputAction () {
       if (this.deleteFlag) {
         if (this.msg.length) {
@@ -79,40 +53,18 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.home-head {
+  margin-top: 30px;
+  color: white;
+}
 .home-video {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  object-fit: fill;
-}
-.home-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
   z-index: -1;
-}
-.td-p {
-  cursor:help;
-}
-.td-item {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  padding-left: 10%;
-  margin: 30px
-}
-.td-img {
-  width: 20%;
-  height: 20%;
-}
-.td-title {
-  margin-left: 20px;
-  text-align: left;
-  -webkit-box-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  bottom: 0;
 }
 .ityped-cursor {
     font-size: 1.1rem;

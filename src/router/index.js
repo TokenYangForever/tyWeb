@@ -7,6 +7,7 @@ import uploadImage from '@/components/uploadImage'
 import mdCompiler from '@/components/markdownCompiler'
 import algorithm from '@/components/algorithm'
 import cheatRoom from '@/components/cheatRoom'
+import historyToday from '@/components/historyToday'
 
 Vue.use(Router)
 
@@ -46,6 +47,11 @@ export default new Router({
       path: '/cheatRoom',
       name: 'cheatRoom',
       component: cheatRoom
+    },
+    {
+      path: '/historyToday',
+      name: 'historyToday',
+      component: historyToday
     }
   ]
 })
