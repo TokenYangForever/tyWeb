@@ -3,11 +3,16 @@
     <p>{{msg}}<span class="ityped-cursor">|</span></p>
     <template v-if='todayList.length > 0'>
       <h3>历史上的今天</h3>
-      <div class='td-item' v-for="(item, index) in todayList" :key='index'>
+<!--       <div class='td-item' v-for="(item, index) in todayList" :key='index'>
         <img class='td-img' :src="item.src">
-        <div class='td-title' @click="searchAction(item.title)"><p>{{item.year}}</p>{{item.title}}</div>
-      </div>
+        <div class='td-title' @click="searchAction(item.title)">{{item.year}}<p class='td-p'>{{item.title}}</p></div>
+      </div> -->
     </template>
+    <div class="home-bg">
+      <video class="home-video" :height="vHeight" loop="loop" autoplay="autoplay" muted="muted">
+        <source src="../assets/video/background.mp4" type="video/mp4">
+      </video>
+    </div>
   </div>
 </template>
 
@@ -19,7 +24,9 @@ export default {
       msg: '',
       msgIndex: 0,
       deleteFlag: false,
-      todayList: []
+      todayList: [],
+      vHeight: window.innerHeight,
+      vWidth: window.innerWidth
     }
   },
   created () {
@@ -72,6 +79,23 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.home-video {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  object-fit: fill;
+}
+.home-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+}
+.td-p {
+  cursor:help;
+}
 .td-item {
   display: -webkit-box;
   display: -ms-flexbox;
