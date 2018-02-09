@@ -1,9 +1,14 @@
 <template>
   <div>
     <h3 class="home-head">{{msg}}<span class="ityped-cursor">|</span></h3>
-    <video class="home-video" loop="loop" autoplay="autoplay" muted="muted">
-      <source src="../assets/video/background.mp4" type="video/mp4">
-    </video>
+    <template v-if="isMobile">
+      <img class="home-bg" src="../assets/img/bgImg.jpg">
+    </template>
+    <template v-else>
+      <video class="home-bg" loop="loop" autoplay="autoplay" muted="muted">
+        <source src="../assets/video/background.mp4" type="video/mp4">
+      </video>
+    </template>
   </div>
 </template>
 
@@ -14,7 +19,8 @@ export default {
     return {
       msg: '',
       msgIndex: 0,
-      deleteFlag: false
+      deleteFlag: false,
+      isMobile: this._config().isMobile
     }
   },
   created () {
@@ -57,7 +63,7 @@ export default {
   margin-top: 30px;
   color: white;
 }
-.home-video {
+.home-bg {
   z-index: -1;
   position: absolute;
   left: 0;

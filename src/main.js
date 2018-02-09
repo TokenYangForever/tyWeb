@@ -27,6 +27,9 @@ Vue.mixin({
     _setTitle (name) {
       document.title = name
     }
+  },
+  created () {
+    window.vm = this
   }
 })
 Vue.config.productionTip = false

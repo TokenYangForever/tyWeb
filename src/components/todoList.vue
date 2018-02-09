@@ -46,15 +46,13 @@ export default {
     this._setTitle('todoList')
     this.axios.get(`${this._config().preurl}todo/getTodo`).then((response) => {
       let result = response.data.result
-      for (let key in result) {
-        // result[key] = util.pick(result[key], ['title', 'description', 'statu'])
-        result[key]._rowVariant = result[key].statu === 'done' ? 'success' : 'warning'
-      }
-      this.todoData = result
+      this.todoData = result.map((item) => {
+        item._rowVariant = item.statu === 'done' ? 'success' : 'warning'
+        return item
+      })
     }).catch(() => {
       this.showAlert({
         msg: '接口异常，请联系管理员Token',
-        autoClose: false,
         type: 'error'
       })
     })
