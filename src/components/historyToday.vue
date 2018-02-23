@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import util from '../common/util.js'
 export default {
   name: 'homepage',
   data () {
@@ -24,6 +25,7 @@ export default {
     let reqDate = new Date().getMonth() + 1 + day
     this.axios.get(`${this._config().preurl}historyToday/getToday?date=${reqDate}`).then((response) => {
       this.todayList = JSON.parse(response.data.result)
+      this.$nextTick(util.lazyLoadImg)
     }).catch(() => {
       this.showAlert({
         msg: '接口异常，请联系管理员Token',
@@ -36,10 +38,6 @@ export default {
     searchAction (title) {
       location.href = `https://www.baidu.com/s?wd=${title}`
     }
-  },
-  mounted () {
-    const lzImg = document.querySelectorAll('[data-img]')
-    console.log('mounted', lzImg.length)
   }
 }
 </script>

@@ -78,14 +78,28 @@ function throttle (func, wait, options) {
   }
 }
 
-function lazyLoadImg (item) {
-  let offsetTop = item.offsetTop
-  let winHeight = window.innerHeight
-  let bodyHeight = document.documentElement.scrollTop
-  if (offsetTop < winHeight + bodyHeight) {
-    item.src = item.getAttribute('data-img')
-    item.removeAttribute('data-img')
+function lazyLoadImg () {
+  function helper (item) {
+    let offsetTop = item.offsetTop
+    let winHeight = window.innerHeight
+    let bodyHeight = document.documentElement.scrollTop
+    if (offsetTop < winHeight + bodyHeight) {
+      item.src = item.getAttribute('data-img')
+      item.removeAttribute('data-img')
+    }
   }
+  let fn = throttle(() => {
+    const lzImg = document.querySelectorAll('[data-img]')
+    if (lzImg.length) {
+      for (let i in lzImg) {
+        helper(lzImg[i])
+      }
+    } else {
+      document.body.onscroll = null
+    }
+  }, 300)
+  document.body.onscroll = fn
+  fn()
 }
 
 export default {

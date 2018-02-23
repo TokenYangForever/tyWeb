@@ -13,7 +13,6 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import config from './common/config.js'
-import util from './common/util'
 
 Vue.use(VueAxios, axios)
 Vue.use(BootstrapVue)
@@ -31,18 +30,6 @@ Vue.mixin({
   },
   created () {
     window.vm = this
-  },
-  mounted () {
-    let fn = util.throttle(() => {
-      const lzImg = document.querySelectorAll('[data-img]')
-      if (lzImg.length) {
-        for (let i in lzImg) {
-          util.lazyLoadImg(lzImg[i])
-        }
-      }
-    }, 300)
-    document.body.onscroll = fn
-    fn()
   }
 })
 Vue.config.productionTip = false
