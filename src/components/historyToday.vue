@@ -3,7 +3,7 @@
     <template v-if='todayList.length > 0'>
       <h3>历史上的今天</h3>
       <div class='td-item' v-for="(item, index) in todayList" :key='index'>
-        <img class='td-img' :src="item.src">
+        <img class='td-img' :data-img="item.src">
         <div class='td-title' @click="searchAction(item.title)">{{item.year}}<p class='td-p'>{{item.title}}</p></div>
       </div>
     </template>
@@ -36,6 +36,10 @@ export default {
     searchAction (title) {
       location.href = `https://www.baidu.com/s?wd=${title}`
     }
+  },
+  mounted () {
+    const lzImg = document.querySelectorAll('[data-img]')
+    console.log('mounted', lzImg.length)
   }
 }
 </script>
