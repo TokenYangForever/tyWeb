@@ -48,8 +48,8 @@ export default {
   },
   mounted () {
     this.msgArr = [
-      '这里是光秃秃的首页',
-      '暂时显示的历史上的今天',
+      '这里是首页',
+      '这是第二页',
       '嘛~就这样吧'
     ]
     this.inputAction()
