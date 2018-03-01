@@ -1,3 +1,6 @@
+
+import filter from 'lodash/filter'
+// 可以像这样引用lodash里的特定方法，不用引入整个库
 function pick (obj, keys) {
   let result = {}
 
@@ -106,5 +109,6 @@ export default {
   pick,
   debounce,
   throttle,
-  lazyLoadImg
+  lazyLoadImg,
+  filter
 }

@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
+    "lodash": "^4.17.5",
     "socket.io-client": "^2.0.4",
     "vue": "^2.4.2",
     "vue-axios": "^2.0.2",
