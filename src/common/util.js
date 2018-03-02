@@ -81,18 +81,18 @@ function throttle (func, wait, options) {
   }
 }
 
-function lazyLoadImg () {
+function lazyLoadImg (dataAttr = 'data-img') {
   function helper (item) {
     let offsetTop = item.offsetTop
     let winHeight = window.innerHeight
     let bodyHeight = document.documentElement.scrollTop
     if (offsetTop < winHeight + bodyHeight) {
-      item.src = item.getAttribute('data-img')
-      item.removeAttribute('data-img')
+      item.src = item.getAttribute(dataAttr)
+      item.removeAttribute(dataAttr)
     }
   }
   let fn = throttle(() => {
-    const lzImg = document.querySelectorAll('[data-img]')
+    const lzImg = document.querySelectorAll(`[${dataAttr}]`)
     if (lzImg.length) {
       for (let i in lzImg) {
         helper(lzImg[i])
@@ -105,10 +105,20 @@ function lazyLoadImg () {
   fn()
 }
 
+const elementIsVisibleInViewport = (el, partiallyVisible = false) => {
+  const { top, left, bottom, right } = el.getBoundingClientRect()
+  const { innerHeight, innerWidth } = window
+  return partiallyVisible
+    ? ((top > 0 && top < innerHeight) || (bottom > 0 && bottom < innerHeight)) &&
+        ((left > 0 && left < innerWidth) || (right > 0 && right < innerWidth))
+    : top >= 0 && left >= 0 && bottom <= innerHeight && right <= innerWidth
+}
+
 export default {
   pick,
   debounce,
   throttle,
   lazyLoadImg,
-  filter
+  filter,
+  elementIsVisibleInViewport
 }
