@@ -105,6 +105,7 @@ function lazyLoadImg (dataAttr = 'data-img') {
   fn()
 }
 
+// 判断某个元素是否在当前视窗之内
 const elementIsVisibleInViewport = (el, partiallyVisible = false) => {
   const { top, left, bottom, right } = el.getBoundingClientRect()
   const { innerHeight, innerWidth } = window
@@ -114,7 +115,23 @@ const elementIsVisibleInViewport = (el, partiallyVisible = false) => {
     : top >= 0 && left >= 0 && bottom <= innerHeight && right <= innerWidth
 }
 
+// 非http链接强行改成https
+const httpsRedirect = () => {
+  if (location.protocol !== 'https:') location.replace('https://' + location.href.split('//')[1])
+}
+
+// 动画滚到到顶部，requestAnimationFrame添加动画
+const scrollToTop = () => {
+  const c = document.documentElement.scrollTop || document.body.scrollTop
+  if (c > 0) {
+    window.requestAnimationFrame && window.requestAnimationFrame(scrollToTop)
+    window.scrollTo(0, c - c / 8)
+  }
+}
+
 export default {
+  httpsRedirect,
+  scrollToTop,
   pick,
   debounce,
   throttle,
