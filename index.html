@@ -9,6 +9,11 @@
     <title>嘟嘟嘟</title>
   </head>
   <body>
+  <script type="module">
+    var ele = document.querySelector('div')
+    console.log(ele)
+    console.log('JS标签加上type="module"属性后，会通知浏览器这段是ES6模块，异步加载并且自动使用严格模式。', 'this == undefined:', this == undefined)
+  </script>
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
