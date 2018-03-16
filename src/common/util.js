@@ -129,6 +129,11 @@ const scrollToTop = () => {
   }
 }
 
+const ubtSend = (msg) => {
+  let img = new Image()
+  img.src = `http://localhost:8081/ubt/t.gif?msg=${msg}`
+}
+
 export default {
   httpsRedirect,
   scrollToTop,
@@ -137,5 +142,6 @@ export default {
   throttle,
   lazyLoadImg,
   filter,
-  elementIsVisibleInViewport
+  elementIsVisibleInViewport,
+  ubtSend
 }

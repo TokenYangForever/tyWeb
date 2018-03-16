@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import util from '../common/util'
 export default {
   name: 'homepage',
   data () {
@@ -24,6 +25,8 @@ export default {
     }
   },
   created () {
+    console.log(util)
+    util.ubtSend('msg')
     this._setTitle('首页')
   },
   methods: {

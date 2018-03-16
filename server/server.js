@@ -18,6 +18,10 @@ app.get('/todo/updateItem', require('./methods/saveById'))
 app.get('/sudo/getSudo', require('./methods/getSudo'))
 app.get('/historyToday/getToday', require('./methods/gettoday'))
 
+app.get('/ubt/t.gif', function (req, res) {
+  console.log(req.query)
+})
+
 const server = app.listen(8081, () => {
   let peopleCounts = 0
   let his = [] // 要想查看之前的聊天记录，可以用这个数组存储，connection的时候把它传过去
