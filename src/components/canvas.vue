@@ -33,21 +33,18 @@ export default {
   mounted () {
     let c = document.getElementById("myCanvas")
     let ctx = c.getContext("2d")
-    window.c = c
-    window.ctx = ctx
     let img = document.getElementById("scream")
-    // let img = document.createElement('img')
-    // img.src = "http://101.200.35.148/actBG.jpg"
-    img.width = this.windowWidth
-    img.windowHeight = this.windowHeight
+    let {windowWidth, windowHeight} = this
+    img.width = windowWidth
+    img.windowHeight = windowHeight
     img.onload = () => {
       console.log('onload')
-      ctx.drawImage(img, 0, 0, this.windowWidth, this.windowHeight)
+      ctx.drawImage(img, 0, 0, windowWidth, windowHeight)
       ctx.font = "70px Verdana"
-      ctx.fillText(this.text[0], 50, 180)
+      ctx.fillText(this.text[0], Math.floor(windowWidth / 8), Math.floor(windowHeight * 0.25714))
       ctx.font = "24px Verdana"
-      ctx.fillText(this.text[1] + this.text[2], 70, 260)
-      ctx.fillText(this.text[3], 70, 305)
+      ctx.fillText(this.text[1] + this.text[2], Math.floor(windowWidth * 0.175), Math.floor(windowHeight * 0.371))
+      ctx.fillText(this.text[3], Math.floor(windowWidth * 0.175), Math.floor(windowHeight * 0.436))
       img.onload = null
       img.src = c.toDataURL('image/jpeg')
       // c.style.display = 'none'
@@ -72,7 +69,5 @@ export default {
 }
 #scream {
   z-index: 20;
-  width: 400px;
-  height: 700px;
 }
 </style>
