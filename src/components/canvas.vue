@@ -50,7 +50,7 @@ export default {
       ctx.fillText(this.text[1] + this.text[2], Math.floor(windowWidth * 0.175), Math.floor(windowHeight * 0.371))
       ctx.fillText(this.text[3], Math.floor(windowWidth * 0.175), Math.floor(windowHeight * 0.436))
       img.onload = null
-      img.src = c.toDataURL('image/jpeg')
+      img.src = c.toDataURL('image/jpeg', 1)
       c.style.display = 'none'
     }
   }
