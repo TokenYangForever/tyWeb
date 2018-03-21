@@ -3,6 +3,7 @@
     <img id="scream" src="../assets/img/actBG.jpg">
     <canvas id="myCanvas" :width="windowWidth" :height="windowHeight">
     </canvas>
+    <div class="voucher-btn" @click="getVoucher"></div>
   </div>
 </template>
 
@@ -27,6 +28,9 @@ export default {
     ]
   },
   methods: {
+    getVoucher () {
+      alert('领取成功')
+    }
   },
   computed: {
   },
@@ -41,13 +45,13 @@ export default {
       console.log('onload')
       ctx.drawImage(img, 0, 0, windowWidth, windowHeight)
       ctx.font = "70px Verdana"
-      ctx.fillText(this.text[0], Math.floor(windowWidth / 8), Math.floor(windowHeight * 0.25714))
+      ctx.fillText(this.text[0], Math.floor(windowWidth / 8), Math.floor(windowHeight * 0.26714))
       ctx.font = "24px Verdana"
       ctx.fillText(this.text[1] + this.text[2], Math.floor(windowWidth * 0.175), Math.floor(windowHeight * 0.371))
       ctx.fillText(this.text[3], Math.floor(windowWidth * 0.175), Math.floor(windowHeight * 0.436))
       img.onload = null
       img.src = c.toDataURL('image/jpeg')
-      // c.style.display = 'none'
+      c.style.display = 'none'
     }
   }
 }
@@ -65,9 +69,15 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 10;
 }
 #scream {
-  z-index: 20;
+}
+.voucher-btn {
+  position: absolute;
+  right: 40px;
+  bottom: 75px;
+  width: 200px;
+  height: 60px;
+  z-index: 100;
 }
 </style>
