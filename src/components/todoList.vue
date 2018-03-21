@@ -42,21 +42,20 @@ export default {
       }
     }
   },
-  async created () {
+  created () {
     this._setTitle('todoList')
-    try {
-      const {data: {result}} = await this.axios.get(`${this._config().preurl}todo/getTodo`)
-      this.todoData = result.map((item) => {
+    this.axios.get(`${this._config().preurl}todo/getTodo`).then(({data}) => {
+      this.todoData = data.result.map((item) => {
         item._rowVariant = item.statu === 'done' ? 'success' : 'warning'
         return item
       })
-    } catch (e) {
+    }).catch(() => {
       this.showAlert({
         msg: '接口异常，请联系管理员Token',
         autoClose: false,
         type: 'error'
       })
-    }
+    })
   },
   methods: {
     clickAction ({itemid}) {

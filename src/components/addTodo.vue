@@ -42,16 +42,15 @@ export default {
     this._setTitle('addTodo')
   },
   methods: {
-    async loadAction () {
+    loadAction () {
       let {title, description} = this
       if (this.nameState || this.desState) {
         return
       }
-      try {
-        const response = await this.axios.post(`${this._config().preurl}todo/savetodo`, {
-          title,
-          description
-        })
+      this.axios.post(`${this._config().preurl}todo/savetodo`, {
+        title,
+        description
+      }).then((response) => {
         if (response.data.err) {
           throw Error(response.data.err)
         }
@@ -61,13 +60,13 @@ export default {
           type: 'success'
         })
         this.cleanAction()
-      } catch (e) {
+      }).catch((e) => {
         this.showAlert({
           msg: '接口异常，请联系管理员Token',
           autoClose: false,
           type: 'error'
         })
-      }
+      })
     },
     cleanAction () {
       this.title = this.description = ''

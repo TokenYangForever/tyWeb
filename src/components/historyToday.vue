@@ -19,21 +19,20 @@ export default {
       todayList: []
     }
   },
-  async created () {
+  created () {
     this._setTitle('历史上的今天')
     let day = new Date().getDate() < 10 ? '0' + new Date().getDate() : new Date().getDate() + ''
     let reqDate = new Date().getMonth() + 1 + day
-    try {
-      const response = await this.axios.get(`${this._config().preurl}historyToday/getToday?date=${reqDate}`)
+    this.axios.get(`${this._config().preurl}historyToday/getToday?date=${reqDate}`).then((response) => {
       this.todayList = JSON.parse(response.data.result)
       this.$nextTick(util.lazyLoadImg)
-    } catch (e) {
+    }).catch((e) => {
       this.showAlert({
         msg: '接口异常，请联系管理员Token',
         autoClose: false,
         type: 'error'
       })
-    }
+    })
   },
   methods: {
     searchAction (title) {

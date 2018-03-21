@@ -50,7 +50,7 @@ export default {
       ctx.fillText(this.text[3], 70, 305)
       img.onload = null
       img.src = c.toDataURL('image/jpeg')
-      c.style.display = 'none'
+      // c.style.display = 'none'
     }
   }
 }
@@ -68,8 +68,10 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 10;
 }
 #scream {
+  z-index: 20;
   width: 400px;
   height: 700px;
 }
