@@ -10,7 +10,7 @@
         <!-- Right aligned nav items -->
         <b-nav is-nav-bar class="ml-auto">
           <b-button size="sm" variant="info" @click='routeAction("/mdCompiler")'>Markdown编辑器</b-button>
-
+          <b-button size="sm" variant="info" @click='routeAction("/canvas")'>canvas</b-button>
           <b-nav-item-dropdown text="图片" right>
             <b-dropdown-item @click='routeAction("/uploadImage")'>上传图片</b-dropdown-item>
           </b-nav-item-dropdown>

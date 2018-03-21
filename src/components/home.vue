@@ -26,7 +26,7 @@ export default {
   },
   created () {
     console.log(util)
-    util.ubtSend('msg')
+    // util.ubtSend('msg')
     this._setTitle('首页')
   },
   methods: {

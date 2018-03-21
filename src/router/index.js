@@ -8,11 +8,17 @@ import mdCompiler from '@/components/markdownCompiler'
 import algorithm from '@/components/algorithm'
 import cheatRoom from '@/components/cheatRoom'
 import historyToday from '@/components/historyToday'
+import canvas from '@/components/canvas'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
+    {
+      path: '/canvas',
+      name: 'canvas',
+      component: canvas
+    },
     {
       path: '/viewTodo',
       name: 'todoList',
