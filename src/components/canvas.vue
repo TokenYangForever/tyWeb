@@ -2,6 +2,7 @@
   <div class='canvas-wrap'>
     <img id="scream" src="../assets/img/actBG.jpg">
     <canvas id="myCanvas" :width="windowWidth" :height="windowHeight">
+    您的浏览器不支持 HTML5 canvas 标签。
     </canvas>
     <div class="voucher-btn" @click="getVoucher"></div>
   </div>
@@ -22,8 +23,8 @@ export default {
     this._setTitle('canvas')
     this.text = [
       Math.random() < 0.5 ? '70' : '90',
-      Math.random() < 0.5 ? '邻家小妹' : '国民初恋',
-      Math.random() < 0.5 ? '和同桌' : '和教导主任',
+      Math.random() < 0.5 ? '邻家小妹小甜甜' : '国民初恋小甜甜',
+      Math.random() < 0.5 ? '和同桌同桌同桌' : '和教导主任',
       Math.random() < 0.5 ? '在游乐场玩碰碰车' : '在动物园丢手绢'
     ]
   },
