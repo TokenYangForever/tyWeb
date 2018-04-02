@@ -153,6 +153,19 @@ const copyToClipboard = str => {
   }
 }
 
+const setFontSize () {
+  // 根据屏幕大小设置font-size，然后移动端再使用rem
+  let html = document.querySelector('html')
+  let fontSize, bodyWidth
+  if (html.getBoundingClientRect) {
+    bodyWidth = html.getBoundingClientRect().width
+  } else {
+    bodyWidth = document.documentElement.clientWidth
+  }
+  fontSize = Math.min(bodyWidth, 540) * 100 / 375;
+  document.documentElement.style.fontSize = `${fontSize.toFixed(3)}px`
+}
+
 export default {
   httpsRedirect,
   scrollToTop,
@@ -163,5 +176,6 @@ export default {
   filter,
   elementIsVisibleInViewport,
   ubtSend,
-  copyToClipboard
+  copyToClipboard,
+  setFontSize
 }
