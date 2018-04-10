@@ -153,7 +153,7 @@ const copyToClipboard = str => {
   }
 }
 
-const setFontSize () {
+const setFontSize = () => {
   // 根据屏幕大小设置font-size，然后移动端再使用rem
   let html = document.querySelector('html')
   let fontSize, bodyWidth
@@ -162,7 +162,7 @@ const setFontSize () {
   } else {
     bodyWidth = document.documentElement.clientWidth
   }
-  fontSize = Math.min(bodyWidth, 540) * 100 / 375;
+  fontSize = Math.min(bodyWidth, 540) * 100 / 375
   document.documentElement.style.fontSize = `${fontSize.toFixed(3)}px`
 }
 

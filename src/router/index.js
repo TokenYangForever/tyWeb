@@ -9,6 +9,7 @@ import algorithm from '@/components/algorithm'
 import cheatRoom from '@/components/cheatRoom'
 import historyToday from '@/components/historyToday'
 import canvas from '@/components/canvas'
+import labelCommunication from '@/components/labelCommunication'
 
 Vue.use(Router)
 
@@ -58,6 +59,11 @@ export default new Router({
       path: '/historyToday',
       name: 'historyToday',
       component: historyToday
+    },
+    {
+      path: '/labelCommunication',
+      name: 'labelCommunication',
+      component: labelCommunication
     }
   ]
 })
