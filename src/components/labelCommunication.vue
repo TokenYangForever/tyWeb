@@ -32,7 +32,6 @@ export default {
     window.addEventListener("storage", this.storagetCallback)
   },
   mounted () {
-    window.onstorage
     if (typeof Worker === "undefined") {
       this.webworkerMsg = '当前浏览器不支持webworker'
     } else {
