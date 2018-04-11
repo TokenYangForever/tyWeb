@@ -10,12 +10,13 @@
         <!-- Right aligned nav items -->
         <b-nav is-nav-bar class="ml-auto">
           <b-button size="sm" variant="info" @click='routeAction("/mdCompiler")'>Markdown编辑器</b-button>
+          <b-button size="sm" variant="info" @click='routeAction("/labelCommunication")'>多标签页之间通信</b-button>
           <b-button size="sm" variant="info" @click='routeAction("/canvas")'>canvas</b-button>
-          <b-nav-item-dropdown text="图片" right>
+          <b-nav-item-dropdown text="图片" right v-if="showMore">
             <b-dropdown-item @click='routeAction("/uploadImage")'>上传图片</b-dropdown-item>
           </b-nav-item-dropdown>
 
-          <b-nav-item-dropdown text="todoList" right>
+          <b-nav-item-dropdown text="todoList" right v-if="showMore">
             <b-dropdown-item @click='routeAction("/addTodo")'>新增</b-dropdown-item>
             <b-dropdown-item @click='routeAction("/viewTodo")'>查看</b-dropdown-item>
           </b-nav-item-dropdown>
@@ -25,7 +26,6 @@
             <template slot="button-content">
               <em>其他</em>
             </template>
-            <b-dropdown-item @click='routeAction("/labelCommunication")'>标签通信</b-dropdown-item>
             <b-dropdown-item @click='routeAction("/historyToday")'>历史上的今天</b-dropdown-item>
             <b-dropdown-item @click='routeAction("/cheatRoom")'>socket.io聊天室</b-dropdown-item>
             <b-dropdown-item @click='routeAction("/algorithm")'>排序算法</b-dropdown-item>
@@ -42,15 +42,26 @@
 import router from './router'
 export default {
   name: 'app',
+  data () {
+    return {
+      showMore: false
+    }
+  },
   methods: {
     routeAction (url) {
       router.push({ path: url })
     }
+  },
+  mounted () {
+    window.vm = this
   }
 }
 </script>
 
 <style>
+.ml-auto button {
+  margin-right: 10px;
+}
 @font-face{
   font-family: element-icons;
   src: url('fonts/element-icons.woff') format('woff'),
