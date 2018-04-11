@@ -2,14 +2,15 @@
   <div>
     <p>来自webworker的消息：{{webworkerMsg}}</p>
     <p>来自localstorage的消息：{{storageMsg}}</p>
-    <div>
+    <div class='lc-wrap'>
       <input v-model="shareWorkerInput" type="text" name="msg" placeholder="输入一些信息">
-      <b-btn size="sm" @click="setWorker" variant="primary">设置webworker传递信息</b-btn>
-      <b-btn size="sm" @click="getWorker" variant="primary">获取webworker传递信息</b-btn>
+      <b-btn size="sm" @click="setWorker" variant="primary">设置向webworker传递的信息</b-btn>
+      <b-btn size="sm" @click="getWorker" variant="primary">获取来自webworker的信息</b-btn>
     </div>
-    <div>
-      <input v-model="localstorageWorker" type="text" name="msg" placeholder="输入一些信息">
-      <b-btn size="sm" @click="clickAction" variant="primary">通过localstorage传递信息</b-btn>
+    <div class='lc-wrap'>
+      <input v-model="localstorageKey" type="text" name="msg" placeholder="输入key">
+      <input v-model="localstorageValue" type="text" name="msg" placeholder="输入value">
+      <b-btn size="sm" @click="clicklocalStorage" variant="primary">通过localstorage传递信息</b-btn>
     </div>
   </div>
 </template>
@@ -22,13 +23,16 @@ export default {
       webworkerMsg: '',
       storageMsg: '',
       shareWorkerInput: '',
-      localstorageWorker: ''
+      localstorageValue: '',
+      localstorageKey: ''
     }
   },
   created () {
     this._setTitle('多标签之间通信')
+    window.addEventListener("storage", this.storagetCallback)
   },
   mounted () {
+    window.onstorage
     if (typeof Worker === "undefined") {
       this.webworkerMsg = '当前浏览器不支持webworker'
     } else {
@@ -41,8 +45,24 @@ export default {
       window.worker = this.worker = worker
     }
   },
+  destroyed () {
+    window.removeEventListener("storage", this.storagetCallback)
+  },
   methods: {
+    storagetCallback ({key, newValue}) {
+      this.storageMsg = `key为：${key}, value为：${newValue}`
+    },
     clicklocalStorage () {
+      let {localstorageKey, localstorageValue} = this
+      if (localstorageKey.length === 0) {
+        alert('请输入key')
+        return
+      }
+      if (localstorageValue.length === 0) {
+        alert('请输入value')
+        return
+      }
+      localStorage.setItem(localstorageKey, localstorageValue)
     },
     getWorker () {
       this.worker.port.postMessage('get')
@@ -56,5 +76,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+.lc-wrap {
+  margin: 20px 0;
+}
 </style>
