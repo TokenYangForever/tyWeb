@@ -12,7 +12,6 @@ import canvas from '@/components/canvas'
 import labelCommunication from '@/components/labelCommunication'
 
 Vue.use(Router)
-
 export default new Router({
   routes: [
     {
