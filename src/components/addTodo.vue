@@ -74,8 +74,6 @@ export default {
   },
   computed: {
     nameState () {
-      let ab = ''
-      console.log(ab)
       return this.title.length > 2 ? null : 'invalid';
     },
     desState () {
