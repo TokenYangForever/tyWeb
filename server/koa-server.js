@@ -29,7 +29,4 @@ app.use(logger)
 app
   .use(router.routes())
   .use(router.allowedMethods())
-// app.use(route.get('/', main))
-// app.use(route.get('/about', about))
-// app.use(route.get('/redirect', redirect))
 app.listen(3001)
