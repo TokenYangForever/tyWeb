@@ -51,37 +51,6 @@ const getBlock = (ar) => {
     return ar
   }
 }
-
-// module.exports = function (req, res) {
-//   let initArray = [
-//     [1, 2, 3, 4, 5, 6, 7, 8, 9],
-//     [4, 5, 6, 7, 8, 9, 1, 2, 3],
-//     [7, 8, 9, 1, 2, 3, 4, 5, 6],
-//     [2, 1, 4, 3, 6, 5, 8, 9, 7],
-//     [3, 6, 5, 8, 9, 7, 2, 1, 4],
-//     [8, 9, 7, 2, 1, 4, 3, 6, 5],
-//     [5, 3, 1, 6, 4, 2, 9, 7, 8],
-//     [6, 4, 2, 9, 7, 8, 5, 3, 1],
-//     [9, 7, 8, 5, 3, 1, 6, 4, 2]
-//   ]
-//   // req.query 请求参数
-//   let backdata = {
-//   }
-//   // 获得打乱后的数组
-//   let getArr = randomArr(initArray)
-//   let result = []
-//   for (let i = 0; i < getArr.length; i++) {
-//     result = [...result, ...getArr[i]]
-//   }
-//   let quesArr = getQueArr(getArr, req.query.difficulty)
-//   let quesResult = []
-//   for (let i = 0; i < quesArr.length; i++) {
-//     quesResult = [...quesResult, ...getArr[i]]
-//   }
-//   backdata.quesArr = quesResult
-//   backdata.result = result
-//   res.send(backdata)
-// }
 let connection = require('../config').connection
 
 module.exports = function (req, res) {

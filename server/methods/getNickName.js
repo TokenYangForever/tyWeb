@@ -8,13 +8,11 @@ module.exports = function () {
   return new Promise((resolve, reject) => {
     connection.query(qstring, function (err, rs) {
       if (err) {
-        console.log(`[query] - :${err}`)
         resolve('姓名')
       }
       result += rs[0].value
       connection.query(secString, function (e, r) {
         if (e) {
-          console.log(`[query] - :${err}`)
           resolve('姓名')
         }
         result += r[0].value
