@@ -106,7 +106,7 @@ function lazyLoadImg (dataAttr = 'data-img') {
 }
 
 // 判断某个元素是否在当前视窗之内
-const elementIsVisibleInViewport = (el, partiallyVisible = false) => {
+function elementIsVisibleInViewport (el, partiallyVisible = false) => {
   const { top, left, bottom, right } = el.getBoundingClientRect()
   const { innerHeight, innerWidth } = window
   return partiallyVisible
@@ -116,12 +116,12 @@ const elementIsVisibleInViewport = (el, partiallyVisible = false) => {
 }
 
 // 非http链接强行改成https
-const httpsRedirect = () => {
+function httpsRedirect () => {
   if (location.protocol !== 'https:') location.replace('https://' + location.href.split('//')[1])
 }
 
 // 动画滚到到顶部，requestAnimationFrame添加动画
-const scrollToTop = () => {
+function scrollToTop () => {
   const c = document.documentElement.scrollTop || document.body.scrollTop
   if (c > 0) {
     window.requestAnimationFrame && window.requestAnimationFrame(scrollToTop)
@@ -129,7 +129,7 @@ const scrollToTop = () => {
   }
 }
 
-const ubtSend = (msg) => {
+function ubtSend (msg) => {
   let img = new Image()
   img.src = `http://localhost:8081/ubt/t.gif?msg=${msg}`
 }
