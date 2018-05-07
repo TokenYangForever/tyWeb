@@ -9,8 +9,12 @@ const about = ctx => {
   ctx.response.body = '<a href="/">Index Page</a>'
 }
 
-const main = ctx => {
+const main = async (ctx, next) => {
+  let timeNow = Date.now()
   ctx.response.body = 'Hello World'
+  await next()
+  console.log('main')
+  console.log(`before next: ${timeNow}, after next: ${Date.now()}`)
 }
 
 const redirect = ctx => {
@@ -19,14 +23,17 @@ const redirect = ctx => {
 }
 
 // 中间件
-const logger = (ctx, next) => {
-  console.log(`${Date.now()} ${ctx.request.method} ${ctx.request.url}`)
-  next()
+const logger = async (ctx, next) => {
+  let timeNow = Date.now()
+  await next()
+  // console.log(`${Date.now()} ${ctx.request.method} ${ctx.request.url}`)
+  console.log('logger')
+  console.log(`before next: ${timeNow}, after next: ${Date.now()}`)
 }
 
 const errorHandler = async (ctx, next) => {
   try {
-    await next();
+    await next()
   } catch (err) {
     ctx.response.status = err.statusCode || err.status || 500;
     ctx.response.body = {
