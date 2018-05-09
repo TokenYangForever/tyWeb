@@ -34,6 +34,7 @@ app.use(ctx => {
   let n = ctx.session.views || 0;
   ctx.session.views = ++n;
   console.log(ctx.session.views)
+  ctx.response.body = 'hello world'
 });
 
 const main = ctx => {
