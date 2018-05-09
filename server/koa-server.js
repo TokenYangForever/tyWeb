@@ -41,11 +41,6 @@ const main = ctx => {
   ctx.cookie.get('cookieA')
   // 这样设置传递给浏览器的cookie
   ctx.cookie.set('cookieA', 'a').set('cookieB', 'b')
-const main = async (ctx, next) => {
-  ctx.response.body = 'Hello World'
-  await next()
-  console.log('main')
-  console.log(`before next: ${timeNow}, after next: ${Date.now()}`)
 }
 
 const redirect = ctx => {
@@ -68,8 +63,5 @@ const errorHandler = async (ctx, next) => {
 
 router.get('/', main).get('/about', about).get('/redirect', redirect)
 
-app.use(compose([logger, errorHandler]))
-app
-  .use(router.routes())
-  .use(router.allowedMethods())
+app.use(errorHandler).use(router.routes()).use(router.allowedMethods())
 app.listen(3001)
