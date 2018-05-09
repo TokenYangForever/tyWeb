@@ -41,7 +41,11 @@ const main = ctx => {
   ctx.cookie.get('cookieA')
   // 这样设置传递给浏览器的cookie
   ctx.cookie.set('cookieA', 'a').set('cookieB', 'b')
+const main = async (ctx, next) => {
   ctx.response.body = 'Hello World'
+  await next()
+  console.log('main')
+  console.log(`before next: ${timeNow}, after next: ${Date.now()}`)
 }
 
 const redirect = ctx => {
@@ -49,14 +53,11 @@ const redirect = ctx => {
   ctx.response.body = '<a href="/">Index Page</a>'
 }
 
-// 中间件
-const logger = (ctx, next) => {
-  next()
-}
+
 
 const errorHandler = async (ctx, next) => {
   try {
-    await next();
+    await next()
   } catch (err) {
     ctx.response.status = err.statusCode || err.status || 500;
     ctx.response.body = {
