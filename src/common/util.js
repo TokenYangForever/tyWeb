@@ -106,7 +106,7 @@ function lazyLoadImg (dataAttr = 'data-img') {
 }
 
 // 判断某个元素是否在当前视窗之内
-function elementIsVisibleInViewport (el, partiallyVisible = false) => {
+function elementIsVisibleInViewport(el, partiallyVisible = false) {
   const { top, left, bottom, right } = el.getBoundingClientRect()
   const { innerHeight, innerWidth } = window
   return partiallyVisible
@@ -116,12 +116,12 @@ function elementIsVisibleInViewport (el, partiallyVisible = false) => {
 }
 
 // 非http链接强行改成https
-function httpsRedirect () => {
+function httpsRedirect () {
   if (location.protocol !== 'https:') location.replace('https://' + location.href.split('//')[1])
 }
 
 // 动画滚到到顶部，requestAnimationFrame添加动画
-function scrollToTop () => {
+function scrollToTop () {
   const c = document.documentElement.scrollTop || document.body.scrollTop
   if (c > 0) {
     window.requestAnimationFrame && window.requestAnimationFrame(scrollToTop)
@@ -129,7 +129,7 @@ function scrollToTop () => {
   }
 }
 
-function ubtSend (msg) => {
+function ubtSend(msg) {
   let img = new Image()
   img.src = `http://localhost:8081/ubt/t.gif?msg=${msg}`
 }
@@ -152,6 +152,19 @@ const copyToClipboard = str => {
     document.getSelection().addRange(selected)
   }
 }
+/**
+ * @param {String} obj - 原对象
+ * @param {String} keys - 需要过滤的key值，数组形式，或者以空格间断的字符串形式
+ * @return {Object} 过滤后的Object对象.
+ */
+function only(obj, keys) {
+  obj = obj || {};
+  if ('string' === typeof keys) keys = keys.split(/ +/);
+  return keys.reduce((ret, key) => {
+    if (null != obj[key]) ret[key] = obj[key]
+    return ret
+  }, {})
+};
 
 const setFontSize = () => {
   // 根据屏幕大小设置font-size，然后移动端再使用rem
@@ -177,5 +190,6 @@ export default {
   elementIsVisibleInViewport,
   ubtSend,
   copyToClipboard,
-  setFontSize
+  setFontSize,
+  only
 }
