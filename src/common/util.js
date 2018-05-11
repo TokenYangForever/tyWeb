@@ -1,22 +1,6 @@
 
 import filter from 'lodash/filter'
 // 可以像这样引用lodash里的特定方法，不用引入整个库
-function pick (obj, keys) {
-  let result = {}
-
-  if (!obj) {
-    return result
-  }
-
-  keys.forEach((item) => {
-    if (obj.hasOwnProperty(item)) {
-      result[item] = obj[item]
-    }
-  })
-
-  return result
-}
-
 function debounce (func, wait, immediate) {
   var timeout, args, context, timestamp, result
 
@@ -153,18 +137,36 @@ const copyToClipboard = str => {
   }
 }
 /**
+ * 根据传入key，对传入对象的属性进行过滤
  * @param {String} obj - 原对象
  * @param {String} keys - 需要过滤的key值，数组形式，或者以空格间断的字符串形式
+ * @example
+ * only({a: 1, b: 1}, 'a') // return {a: 1}
  * @return {Object} 过滤后的Object对象.
  */
 function only(obj, keys) {
-  obj = obj || {};
+  obj = obj || {}
   if ('string' === typeof keys) keys = keys.split(/ +/);
   return keys.reduce((ret, key) => {
     if (null != obj[key]) ret[key] = obj[key]
     return ret
   }, {})
-};
+}
+
+/**
+ * 返回一个与传入对象键值相反的结果对象
+ * @param {Object} obj - 原对象
+ * @return {Object} 键值相反的结果对象
+ * @example
+ * invert({a: 'b'}) // return {b: 'a'}
+ */
+function invert(obj) {
+  obj = obj || {}
+  return Object.keys(obj).reduce((cur, item) => {
+    cur[obj[item]] = item
+    return cur
+  }, {})
+}
 
 const setFontSize = () => {
   // 根据屏幕大小设置font-size，然后移动端再使用rem
@@ -182,7 +184,6 @@ const setFontSize = () => {
 export default {
   httpsRedirect,
   scrollToTop,
-  pick,
   debounce,
   throttle,
   lazyLoadImg,
@@ -191,5 +192,6 @@ export default {
   ubtSend,
   copyToClipboard,
   setFontSize,
-  only
+  only,
+  invert
 }
