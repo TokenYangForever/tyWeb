@@ -1,16 +1,30 @@
-const Koa = require('koa')
-const app = new Koa()
-app.use(async (ctx, next) => {
-	console.log(1)
-	await next()
-	console.log(3)
-})
-app.use((ctx) => {
-	return new Promise((resolve,reject) => {
-		setTimeout(() => {
-			console.log(2)
-			resolve()
-		}, 2000)
-	})
-})
-app.listen(3001)
+
+class fatherClass {
+  // ...
+  constructor(props) {
+  	this.fatherValue = 'papa'
+  }
+}
+
+function testable (a) {
+  a.a = 123
+  class newClass extends a {
+        constructor(props) {
+            super(props)
+            this.testClass = 'wtf'
+        }
+  }
+  return newClass
+}
+
+@testable
+class MyTestableClass extends fatherClass {
+  // ...
+  constructor(props) {
+    super(props)
+  	this.testClass = 'MyTestableClass'
+  }
+}
+
+
+console.log(new MyTestableClass().testClass, new MyTestableClass().fatherValue)

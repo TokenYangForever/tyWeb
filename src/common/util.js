@@ -181,6 +181,36 @@ const setFontSize = () => {
   document.documentElement.style.fontSize = `${fontSize.toFixed(3)}px`
 }
 
+const isObject = obj => Object.prototype.toString.call(obj) === '[object Object]';
+ /**
+  * 扁平化数组/对象，返回一个对象
+  * @param {Array/Object} map 原对象/数组
+  */
+// From: https://github.com/redux-utilities/redux-actions/blob/master/src/utils/flattenWhenNode.js
+const flatten = (
+    map,
+    partialFlatMap = {},
+    partialFlatActionType = ''
+) => {
+    const connectNamespace = type =>
+        partialFlatActionType
+            ? `${partialFlatActionType}.${type}`
+            : type;
+
+    Object.keys(map).forEach(type => {
+        const nextNamespace = connectNamespace(type);
+        const mapValue = map[type];
+
+        if (isObject(mapValue)) {
+            flatten(mapValue, partialFlatMap, nextNamespace);
+        } else {
+            partialFlatMap[nextNamespace] = mapValue;
+        }
+    });
+
+    return partialFlatMap;
+};
+
 export default {
   httpsRedirect,
   scrollToTop,
@@ -193,5 +223,6 @@ export default {
   copyToClipboard,
   setFontSize,
   only,
-  invert
+  invert,
+  flatten
 }
