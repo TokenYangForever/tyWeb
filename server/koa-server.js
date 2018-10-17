@@ -44,7 +44,7 @@ app.use(errorHandler).use(session(CONFIG, app)).use(async (ctx, next) => {
   await next()
   let n = ctx.session.views || 0
   ctx.session.views = ++n
-  console.log(ctx.session.views)
+  // console.log(ctx.session.views)
 });
 
 // or if you prefer all default config, just use => app.use(session(app));
