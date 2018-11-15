@@ -5,8 +5,9 @@
       <img class="home-bg" src="../assets/img/bgImg.jpg">
     </template>
     <template v-else>
-      <video class="home-bg" loop="loop" autoplay="autoplay" muted="muted">
-        <source src="../assets/video/background.mp4" type="video/mp4">
+      <video class="home-bg" loop="loop" autoplay="autoplay" muted="muted" :src="videoSrc">
+<!--         <source src="../assets/video/background.mp4" type="video/mp4"> -->
+<!--         <source :src="videoSrc" type=""> -->
       </video>
     </template>
   </div>
@@ -21,7 +22,8 @@ export default {
       msg: '',
       msgIndex: 0,
       deleteFlag: false,
-      isMobile: this._config().isMobile
+      isMobile: this._config().isMobile,
+      videoSrc: ''
     }
   },
   created () {
@@ -50,12 +52,34 @@ export default {
     }
   },
   mounted () {
+    let vm = this
     this.msgArr = [
       '这里是首页',
       '这是第二页',
       '嘛~就这样吧'
     ]
-    this.inputAction()
+    let xhr = new XMLHttpRequest()
+    // 配置请求方式、请求地址以及是否同步
+    xhr.open('GET', 'http://localhost:3001/video', true)
+    // 设置请求结果类型为blob
+    // xhr.responseType = 'blob'
+    // 请求成功回调函数
+    xhr.onload = function(e) {
+      if (this.status === 200) {
+        // 请求成功
+        // 获取blob对象
+        // var blob = this.response;
+        vm.videoSrc = URL.createObjectURL(this.response)
+        window.res = this.response
+        // 获取blob对象地址，并把值赋给容器
+        // $("#sound").attr("src", URL.createObjectURL(blob));
+      }
+    }
+    xhr.send()
+    // this.axios.get('http://localhost:3001/video').then(({data}) => {
+    //   this.videoSrc = URL.createObjectURL(new Blob(data.result.data))
+    // })
+    // this.inputAction()
   }
 }
 </script>

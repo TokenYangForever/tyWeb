@@ -212,10 +212,10 @@ const flatten = (
 };
 
 // 找出一个数组中最小的数字
-function findSmallestNum(arr) {
-  return Reflect.apply(Math.min, null, arr);
-  return Math.min(...arr);
-}
+// function findSmallestNum(arr) {
+//   return Reflect.apply(Math.min, null, arr);
+//   return Math.min(...arr);
+// }
 
 export default {
   httpsRedirect,
