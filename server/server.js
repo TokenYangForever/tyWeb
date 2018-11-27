@@ -18,6 +18,9 @@ app.get('/todo/updateItem', require('./methods/saveById'))
 app.get('/sudo/getSudo', require('./methods/getSudo'))
 app.get('/historyToday/getToday', require('./methods/gettoday'))
 
+// JWT login
+app.post('/login', require('./methods/jwt/login'))
+
 app.get('/ubt/t.gif', function (req, res) {
   console.log(req.query)
 })
