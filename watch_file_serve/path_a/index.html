@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <meta name=description content="">
+    <meta name=keywords content="">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+    <meta name="format-detection" content="telephone=no">
+    <!-- 苹果收藏后，变成app模式 -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <script type="text/javascript">
+    </script>
+  </head>
+  <body>
+    <header class="app-header"></header>
+    <section class="main" id="main">
+    </section>
+    <div class="screen-center page-loading-box" id="js-fake">
+      <div class="page-loading-icon page-loading-circle">
+        <div class="page-loading-icon page-loading-line">weddw</div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      const socket = new WebSocket('ws://localhost:8006');
+      // Listen for messages
+      socket.addEventListener('message', function ({data}) {
+        location.reload()
+      });
+    </script>
+  </body>
+</html>
