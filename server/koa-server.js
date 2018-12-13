@@ -1,5 +1,6 @@
 const Koa = require('koa')
 const Router = require('koa-router')
+const Readable = require('stream').Readable;
 const session = require('koa-session')
 const app = new Koa()
 const router = new Router()
@@ -7,7 +8,6 @@ const about = ctx => {
   ctx.response.type = 'html'
   ctx.response.body = '<a href="/">Index Page</a>'
 }
-
 app.keys = ['some secret hurr'];
 
 const CONFIG = {
@@ -44,7 +44,6 @@ app.use(errorHandler).use(session(CONFIG, app)).use(async (ctx, next) => {
   await next()
   let n = ctx.session.views || 0
   ctx.session.views = ++n
-  // console.log(ctx.session.views)
 });
 
 // or if you prefer all default config, just use => app.use(session(app));
@@ -59,8 +58,29 @@ const redirect = ctx => {
   ctx.response.body = '<a href="/">Index Page</a>'
 }
 
+const sse = (stream,event, data) => {
+  stream.push(`event:${ event }\ndata: ${ JSON.stringify(data) }\n\n`)
+}
 
-
+router.get('/es',(ctx,next) => {
+  let stream = new Readable({
+    read(size) {
+    }
+  });
+  // ctx.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+  ctx.set({
+    'Content-Type':'text/event-stream',
+    'Cache-Control':'no-cache',
+    Connection: 'keep-alive',
+    'Access-Control-Allow-Origin': '*'
+  });
+  sse(stream,'test',{a: "yango",b: "tango"});
+  ctx.body = stream;
+  setInterval(()=>{
+    sse(stream,'test',{a: "yango", b: Date.now()});
+  }, 1000); 
+  next()
+});
 
 
 router.get('/', main).get('/about', about).get('/redirect', redirect)
