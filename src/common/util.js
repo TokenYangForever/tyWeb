@@ -33,6 +33,25 @@ function debounce (func, wait, immediate) {
   }
 }
 
+function digitLength(num) {
+  // Get digit length of e
+  const eSplit = num.toString().split(/[eE]/);
+  const len = (eSplit[0].split('.')[1] || '').length - (+(eSplit[1] || 0));
+  return len > 0 ? len : 0;
+}
+
+/**
+ * 精准计算
+ * @param {number} num1 
+ * @param {number} num2 
+ * @example precSum(0.1, 0.2) => 0.3
+ */
+function precSum(num1, num2) {
+  const baseLenght = +`1e${Math.max(digitLength(num1), digitLength(num2))}`
+  
+  return (num1 * baseLenght + num2 * baseLenght)/baseLenght
+}
+
 function throttle (func, wait, options) {
   var context, args, result
   var timeout = null
@@ -230,5 +249,6 @@ export default {
   setFontSize,
   only,
   invert,
-  flatten
+  flatten,
+  precSum
 }
